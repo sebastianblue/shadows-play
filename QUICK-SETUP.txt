@@ -1,0 +1,13 @@
+QUICK SETUP
+===========
+
+1. Create a blank Google Sheet.
+2. Extensions > Apps Script.
+3. Paste google-apps-script/Code.gs.
+4. Run setupSheet once and approve permissions.
+5. Deploy > New deployment > Web app.
+6. Execute as: Me. Access: Anyone (if permitted).
+7. Copy the /exec URL.
+8. Paste it into config.js.
+9. Upload index.html, styles.css, script.js and config.js to a static host.
+10. Submit a test response and confirm it appears in the Responses tab.
