@@ -53,7 +53,13 @@ button { cursor: pointer; }
   font-weight: 500;
 }
 .creators { margin: 26px 0 0; color: var(--muted); font-size: 0.86rem; }
-.lede { max-width: 760px; font-family: Georgia, serif; font-size: 1.18rem; line-height: 1.7; margin: 24px 0 30px; }
+.lede { max-width: 760px; font-family: Georgia, serif; font-size: 1.18rem; line-height: 1.7; margin: 24px 0 22px; }
+
+.deck-link { margin: 0 0 22px; }
+.deck-link a { color: var(--lichen); text-decoration: none; border-bottom: 1px solid rgba(213, 244, 180, 0.4); padding-bottom: 1px; font-size: 0.95rem; }
+.deck-link a:hover { color: var(--glow); border-bottom-color: var(--glow); }
+
+.interest-note { max-width: 760px; color: var(--muted); font-size: 0.86rem; line-height: 1.6; margin: 0 0 30px; padding: 13px 16px; border-left: 2px solid var(--ember); background: rgba(255, 120, 71, 0.07); }
 
 .timeline-ribbon {
   display: grid;
