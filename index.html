@@ -5,26 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Interest form for We're Still Seeing Shadows, an immersive nature play with music.">
   <title>We're Still Seeing Shadows — Join the Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="config.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
+  <div class="masthead">
+    <span>An immersive nature play with music</span>
+    <span class="masthead-right">Sep 21 — Nov 22</span>
+  </div>
+
   <main class="page-shell">
     <header class="hero">
-      <p class="eyebrow">AN IMMERSIVE NATURE PLAY WITH MUSIC</p>
-      <h1>we’re still<br>seeing shadows</h1>
-      <p class="creators">Created by Heather Schechter, Audrey Hunter, and Sebastian Hochman</p>
-      <p class="lede">We're putting together the team for this show: producers, designers, builders, stage managers, board operators, and front-of-house. If you want to be part of it, fill this out. Tell us what you'd like to do, what you've worked on, and when you're free.</p>
-      <p class="deck-link"><a href="https://docs.google.com/presentation/d/1f2A2UBR3-IKbvJHAudU04Glp5LPdQxAPMOCa9Iw0By8/edit?slide=id.g3554116a059_0_25#slide=id.g3554116a059_0_25" target="_blank" rel="noopener noreferrer">Take a look at the project overview &rarr;</a></p>
-      <p class="interest-note">This is an interest form, not a commitment. Filling it out doesn't sign you up for anything &mdash; it just lets us know you'd like to be involved. We'll talk through roles and schedules with you before anyone takes one on.</p>
-      <div class="timeline-ribbon" aria-label="Production timeline">
-        <span><b>Week 1</b> September 21</span>
-        <span><b>First full run</b> October 25</span>
-        <span><b>Design run</b> November 8</span>
-        <span><b>Performances</b> November 20–22</span>
+      <h1>
+        <span class="line-solid">We&rsquo;re Still</span>
+        <span class="line-serif">seeing</span>
+        <span class="line-outline">Shadows</span>
+      </h1>
+
+      <div class="hero-split">
+        <div class="hero-copy">
+          <p class="lede">We're putting together the team for this show: producers, designers, builders, stage managers, board operators, and front of house. If you want to be part of it, fill this out. Tell us what you'd like to do, what you've worked on, and when you're free.</p>
+          <p class="deck-link"><a href="https://docs.google.com/presentation/d/1f2A2UBR3-IKbvJHAudU04Glp5LPdQxAPMOCa9Iw0By8/edit?slide=id.g3554116a059_0_25#slide=id.g3554116a059_0_25" target="_blank" rel="noopener noreferrer">Project overview deck &rarr;</a></p>
+          <aside class="interest-note">
+            <span class="note-tag">Note</span>
+            <p>This is an interest form, not a commitment. Filling it out doesn't sign you up for anything &mdash; it just lets us know you'd like to be involved. We'll talk through roles and schedules with you before anyone takes one on.</p>
+          </aside>
+        </div>
+        <dl class="spec-sheet">
+          <div><dt>Created by</dt><dd>Heather Schechter<br>Audrey Hunter<br>Sebastian Hochman</dd></div>
+          <div><dt>Rehearsals</dt><dd>Sep 21 &mdash; Nov 19</dd></div>
+          <div><dt>Performances</dt><dd>Nov 20 &mdash; 22</dd></div>
+          <div><dt>Contact</dt><dd><a href="mailto:shochman@stanford.edu">shochman@stanford.edu</a></dd></div>
+        </dl>
       </div>
     </header>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Now assembling the team <i>&#10035;</i> Producers <i>&#10035;</i> Designers <i>&#10035;</i> Builders <i>&#10035;</i> Stage managers <i>&#10035;</i> Operators <i>&#10035;</i> Front of house <i>&#10035;</i></span>
+        <span>Now assembling the team <i>&#10035;</i> Producers <i>&#10035;</i> Designers <i>&#10035;</i> Builders <i>&#10035;</i> Stage managers <i>&#10035;</i> Operators <i>&#10035;</i> Front of house <i>&#10035;</i></span>
+      </div>
+    </div>
+
+    <div class="timeline-ribbon" aria-label="Production timeline">
+      <span><b>Sep 21</b>Week 1</span>
+      <span><b>Oct 25</b>First full run</span>
+      <span><b>Nov 8</b>Design run</span>
+      <span><b>Nov 20&ndash;22</b>Performances</span>
+    </div>
 
     <section class="form-frame">
       <div class="progress-wrap" aria-label="Form progress">
@@ -39,10 +71,7 @@
         <section class="form-step is-active" data-step="1" data-step-name="About you">
           <div class="section-heading">
             <p class="section-number">01</p>
-            <div>
-              <h2>About you</h2>
-              <p>If you need anything, please reach out to producer Sebastian Hochman shochman@stanford.edu.</p>
-            </div>
+            <h2>About you</h2>
           </div>
 
           <div class="field-grid two-col">
@@ -85,10 +114,8 @@
         <section class="form-step" data-step="2" data-step-name="Roles">
           <div class="section-heading">
             <p class="section-number">02</p>
-            <div>
-              <h2>What roles interest you?</h2>
-              <p>Check any role you'd be actually interested in. You'll pick your top choice at the bottom.</p>
-            </div>
+            <h2>Roles</h2>
+            <p class="section-note">Check everything you'd genuinely want to do, then pick your first choice at the bottom.</p>
           </div>
 
           <div id="role-error" class="inline-error" role="alert" hidden>Please select at least one role.</div>
@@ -96,39 +123,39 @@
           <fieldset class="role-group">
             <legend>Leadership &amp; stage management</legend>
             <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="producers"><span><b>Producers</b><small>Planning, staffing, budget and momentum</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="assistant_director"><span><b>Assistant director</b><small>Creative and rehearsal support</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="stage_manager"><span><b>Stage manager</b><small>Rehearsals, schedules and communication</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="assistant_stage_manager"><span><b>Assistant stage manager</b><small>Backstage, presets and run support</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="technical_director"><span><b>Technical director</b><small>Build, site and technical planning</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="production_assistant"><span><b>Production assistant</b><small>Flexible producing and rehearsal support</small></span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="producers"><span>Producers</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="assistant_director"><span>Assistant director</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="stage_manager"><span>Stage manager</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="assistant_stage_manager"><span>Assistant stage manager</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="technical_director"><span>Technical director</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="production_assistant"><span>Production assistant</span></label>
             </div>
           </fieldset>
 
           <fieldset class="role-group">
             <legend>Design, movement &amp; puppetry</legend>
             <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="lighting_designer"><span><b>Lighting designer</b><small>Dusk-to-dark lighting world</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="sound_designer"><span><b>Sound designer</b><small>Acoustic, electronic and environmental sound</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="set_designer"><span><b>Set designer</b><small>Outdoor playing space and audience world</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="props_designer"><span><b>Props designer</b><small>Objects, dressing and practical elements</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="costume_designer"><span><b>Costume designer</b><small>Character, weather and movement</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="projections_designer"><span><b>Projections / multimedia</b><small>Images, data and outdoor surfaces</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="intimacy_coordinator"><span><b>Intimacy coordination</b><small>Consent-based physical storytelling</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="puppetry_coordinator"><span><b>Puppetry coordination / choreography</b><small>Movement vocabulary and performer coaching</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="puppet_construction"><span><b>Puppet construction</b><small>Prototyping, fabrication and repair</small></span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="lighting_designer"><span>Lighting designer</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="sound_designer"><span>Sound designer</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="set_designer"><span>Set designer</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="props_designer"><span>Props designer</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="costume_designer"><span>Costume designer</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="projections_designer"><span>Projections / multimedia</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="intimacy_coordinator"><span>Intimacy coordination</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="puppetry_coordinator"><span>Puppetry / choreography</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="puppet_construction"><span>Puppet construction</span></label>
             </div>
           </fieldset>
 
           <fieldset class="role-group">
             <legend>Build, operation &amp; audience</legend>
             <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="scenic_builder"><span><b>Scenic builder</b><small>Construction, install and strike</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="qlab_operator"><span><b>QLab operation</b><small>Audio, video and show control</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="lightboard_operator"><span><b>Light-board operation</b><small>Cue execution during tech and shows</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="photography_marketing"><span><b>Photography &amp; marketing</b><small>Documentation and audience outreach</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="graphic_design"><span><b>Graphic design</b><small>Identity, posters, program and digital assets</small></span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="house_management"><span><b>House management</b><small>Audience flow, access and front of house</small></span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="scenic_builder"><span>Scenic builder</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="qlab_operator"><span>QLab operation</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="lightboard_operator"><span>Light-board operation</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="photography_marketing"><span>Photography &amp; marketing</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="graphic_design"><span>Graphic design</span></label>
+              <label class="role-card"><input type="checkbox" name="roles" value="house_management"><span>House management</span></label>
             </div>
           </fieldset>
 
@@ -154,10 +181,8 @@
         <section class="form-step" data-step="3" data-step-name="Experience">
           <div class="section-heading">
             <p class="section-number">03</p>
-            <div>
-              <h2>Your experience</h2>
-              <p>These questions are based on the roles you checked.</p>
-            </div>
+            <h2>Experience</h2>
+            <p class="section-note">These questions match the roles you checked.</p>
           </div>
 
           <div class="branch empty-branch" id="no-branch-message">
@@ -284,16 +309,14 @@
         <section class="form-step" data-step="4" data-step-name="Availability">
           <div class="section-heading">
             <p class="section-number">04</p>
-            <div>
-              <h2>Availability</h2>
-              <p>The dates below depend on the roles you checked. We're still nailing down exact call times.</p>
-            </div>
+            <h2>Availability</h2>
+            <p class="section-note">The dates below depend on the roles you checked. Exact call times are still being set.</p>
           </div>
 
           <div class="calendar-key">
-            <span><i class="required-dot"></i> Essential for selected role</span>
-            <span><i class="preferred-dot"></i> Strongly preferred</span>
-            <span><i class="deadline-dot"></i> Deadline or flexible check-in</span>
+            <span class="key-tag required">Essential</span>
+            <span class="key-tag preferred">Preferred</span>
+            <span class="key-tag deadline">Deadline / flexible</span>
           </div>
 
           <div id="availability-calendar" class="availability-calendar"></div>
@@ -325,10 +348,8 @@
         <section class="form-step" data-step="5" data-step-name="Review & submit">
           <div class="section-heading">
             <p class="section-number">05</p>
-            <div>
-              <h2>Last step</h2>
-              <p>This just tells us you're interested. We'll talk through the role, schedule, and what's involved before anything's confirmed.</p>
-            </div>
+            <h2>Last step</h2>
+            <p class="section-note">This just tells us you're interested. We'll talk through the role and schedule before anything's confirmed.</p>
           </div>
 
           <label class="field">
@@ -364,8 +385,7 @@
       </form>
 
       <section id="success-panel" class="success-panel" hidden>
-        <p class="section-number">RECEIVED</p>
-        <h2>Thanks!</h2>
+        <h2 class="received-word">Received</h2>
         <p>We got your response. We'll be in touch once we've gone through everyone and sorted out roles and schedules.</p>
         <button class="button secondary" id="submit-another" type="button">Submit another response</button>
       </section>
@@ -373,8 +393,13 @@
       <iframe id="submission-target" name="submission-target" title="Submission response" hidden></iframe>
     </section>
 
-    <footer>
-      <p>Questions? Email <a href="mailto:shochman@stanford.edu">shochman@stanford.edu</a>.</p>
+    <footer class="site-footer">
+      <p class="footer-label">Questions?</p>
+      <a class="footer-mail" href="mailto:shochman@stanford.edu">shochman@stanford.edu</a>
+      <div class="footer-base">
+        <span>We&rsquo;re Still Seeing Shadows</span>
+        <span>Sep 21 &mdash; Nov 22</span>
+      </div>
     </footer>
   </main>
 </body>

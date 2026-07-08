@@ -1,6 +1,6 @@
 # We’re Still Seeing Shadows — Interest Form
 
-A responsive, branching recruitment form styled to match the project’s moss-green, handmade-science aesthetic.
+A responsive, branching recruitment form with a high-contrast editorial look: warm paper background, ink-black brutalist type, hairline rules, and a moss-green accent.
 
 ## Files
 
