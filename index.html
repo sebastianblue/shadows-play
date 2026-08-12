@@ -2,405 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Interest form for We're Still Seeing Shadows, an immersive nature play with music.">
-  <title>We're Still Seeing Shadows — Join the Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="We're Still Seeing Shadows — a new immersive nature play with music.">
+  <meta name="theme-color" content="#284E12">
+  <title>We&rsquo;re Still Seeing Shadows</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="config.js" defer></script>
   <script src="script.js" defer></script>
 </head>
+
 <body>
-  <div class="masthead">
-    <span>An immersive nature play with music</span>
-    <span class="masthead-right">Sep 21 — Nov 22</span>
-  </div>
-
-  <main class="page-shell">
-    <header class="hero">
-      <h1>
-        <span class="line-solid">We&rsquo;re Still</span>
-        <span class="line-serif">seeing</span>
-        <span class="line-outline">Shadows</span>
-      </h1>
-
-      <div class="hero-split">
-        <div class="hero-copy">
-          <p class="lede">We're putting together the team for this show: producers, designers, builders, stage managers, board operators, and front of house. If you want to be part of it, fill this out. Tell us what you'd like to do, what you've worked on, and when you're free.</p>
-          <p class="deck-link"><a href="https://docs.google.com/presentation/d/1f2A2UBR3-IKbvJHAudU04Glp5LPdQxAPMOCa9Iw0By8/edit?slide=id.g3554116a059_0_25#slide=id.g3554116a059_0_25" target="_blank" rel="noopener noreferrer">Project overview deck &rarr;</a></p>
-          <aside class="interest-note">
-            <span class="note-tag">Note</span>
-            <p>This is an interest form, not a commitment. Filling it out doesn't sign you up for anything &mdash; it just lets us know you'd like to be involved. We'll talk through roles and schedules with you before anyone takes one on.</p>
-          </aside>
-        </div>
-        <dl class="spec-sheet">
-          <div><dt>Created by</dt><dd>Heather Schechter<br>Audrey Hunter<br>Sebastian Hochman</dd></div>
-          <div><dt>Rehearsals</dt><dd>Sep 21 &mdash; Nov 19</dd></div>
-          <div><dt>Performances</dt><dd>Nov 20 &mdash; 22</dd></div>
-          <div><dt>Contact</dt><dd><a href="mailto:shochman@stanford.edu">shochman@stanford.edu</a></dd></div>
-        </dl>
-      </div>
-    </header>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>Now assembling the team <i>&#10035;</i> Producers <i>&#10035;</i> Designers <i>&#10035;</i> Builders <i>&#10035;</i> Stage managers <i>&#10035;</i> Operators <i>&#10035;</i> Front of house <i>&#10035;</i></span>
-        <span>Now assembling the team <i>&#10035;</i> Producers <i>&#10035;</i> Designers <i>&#10035;</i> Builders <i>&#10035;</i> Stage managers <i>&#10035;</i> Operators <i>&#10035;</i> Front of house <i>&#10035;</i></span>
-      </div>
-    </div>
-
-    <div class="timeline-ribbon" aria-label="Production timeline">
-      <span><b>Sep 21</b>Week 1</span>
-      <span><b>Oct 25</b>First full run</span>
-      <span><b>Nov 8</b>Design run</span>
-      <span><b>Nov 20&ndash;22</b>Performances</span>
-    </div>
-
-    <section class="form-frame">
-      <div class="progress-wrap" aria-label="Form progress">
-        <div class="progress-copy"><span id="step-label">1 of 5</span><span id="step-name">About you</span></div>
-        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+  <main class="experience">
+    <section id="landing-screen" class="screen landing-screen" aria-labelledby="site-title">
+      <div class="landing-copy">
+        <h1 id="site-title">we&rsquo;re still seeing shadows</h1>
+        <p>a new immersive nature play with music</p>
       </div>
 
-      <form id="interest-form" novalidate>
-        <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="payload" id="payload-field">
-
-        <section class="form-step is-active" data-step="1" data-step-name="About you">
-          <div class="section-heading">
-            <p class="section-number">01</p>
-            <h2>About you</h2>
-          </div>
-
-          <div class="field-grid two-col">
-            <label class="field">
-              <span>Full name <em>*</em></span>
-              <input type="text" name="fullName" autocomplete="name" required>
-            </label>
-            <label class="field">
-              <span>Email <em>*</em></span>
-              <input type="email" name="email" autocomplete="email" required>
-            </label>
-            <label class="field">
-              <span>Phone</span>
-              <input type="tel" name="phone" autocomplete="tel">
-            </label>
-            <label class="field">
-              <span>Pronouns</span>
-              <input type="text" name="pronouns" placeholder="Optional">
-            </label>
-            <label class="field">
-              <span>Stanford affiliation / year</span>
-              <input type="text" name="affiliation" placeholder="e.g. TAPS ’27, community collaborator">
-            </label>
-            <label class="field">
-              <span>Current location</span>
-              <input type="text" name="location" placeholder="City or campus area">
-            </label>
-          </div>
-
-          <label class="field">
-            <span>Portfolio, website or work samples</span>
-            <input type="url" name="portfolioUrl" placeholder="https://">
-          </label>
-
-          <div class="step-actions end">
-            <button class="button primary" type="button" data-next>Continue</button>
-          </div>
-        </section>
-
-        <section class="form-step" data-step="2" data-step-name="Roles">
-          <div class="section-heading">
-            <p class="section-number">02</p>
-            <h2>Roles</h2>
-            <p class="section-note">Check everything you'd genuinely want to do, then pick your first choice at the bottom.</p>
-          </div>
-
-          <div id="role-error" class="inline-error" role="alert" hidden>Please select at least one role.</div>
-
-          <fieldset class="role-group">
-            <legend>Leadership &amp; stage management</legend>
-            <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="producers"><span>Producers</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="assistant_director"><span>Assistant director</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="stage_manager"><span>Stage manager</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="assistant_stage_manager"><span>Assistant stage manager</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="technical_director"><span>Technical director</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="production_assistant"><span>Production assistant</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="role-group">
-            <legend>Design, movement &amp; puppetry</legend>
-            <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="lighting_designer"><span>Lighting designer</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="sound_designer"><span>Sound designer</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="set_designer"><span>Set designer</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="props_designer"><span>Props designer</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="costume_designer"><span>Costume designer</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="projections_designer"><span>Projections / multimedia</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="intimacy_coordinator"><span>Intimacy coordination</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="puppetry_coordinator"><span>Puppetry / choreography</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="puppet_construction"><span>Puppet construction</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="role-group">
-            <legend>Build, operation &amp; audience</legend>
-            <div class="role-grid">
-              <label class="role-card"><input type="checkbox" name="roles" value="scenic_builder"><span>Scenic builder</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="qlab_operator"><span>QLab operation</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="lightboard_operator"><span>Light-board operation</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="photography_marketing"><span>Photography &amp; marketing</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="graphic_design"><span>Graphic design</span></label>
-              <label class="role-card"><input type="checkbox" name="roles" value="house_management"><span>House management</span></label>
-            </div>
-          </fieldset>
-
-          <div class="field-grid two-col top-gap">
-            <label class="field">
-              <span>First-choice role <em>*</em></span>
-              <select name="primaryRole" id="primary-role" required disabled>
-                <option value="">Select roles above first</option>
-              </select>
-            </label>
-            <label class="field">
-              <span>Another role that isn't listed here?</span>
-              <input type="text" name="otherRole" placeholder="Optional">
-            </label>
-          </div>
-
-          <div class="step-actions">
-            <button class="button secondary" type="button" data-back>Back</button>
-            <button class="button primary" type="button" data-next>Continue</button>
-          </div>
-        </section>
-
-        <section class="form-step" data-step="3" data-step-name="Experience">
-          <div class="section-heading">
-            <p class="section-number">03</p>
-            <h2>Experience</h2>
-            <p class="section-note">These questions match the roles you checked.</p>
-          </div>
-
-          <div class="branch empty-branch" id="no-branch-message">
-            <p>Go back and check a role to see questions here.</p>
-          </div>
-
-          <div class="branch" data-branch="leadership" hidden>
-            <h3>Leadership &amp; coordination</h3>
-            <label class="field">
-              <span>Tell us about relevant producing, directing, stage-management or coordination experience.</span>
-              <textarea name="leadershipExperience" rows="5"></textarea>
-            </label>
-            <label class="field">
-              <span>What helps you keep a collaborative process clear and moving?</span>
-              <textarea name="collaborationApproach" rows="4"></textarea>
-            </label>
-            <fieldset class="choice-group">
-              <legend>Could you attend a regular weekly production meeting or rehearsal?</legend>
-              <label><input type="radio" name="weeklyCommitment" value="yes"> Yes</label>
-              <label><input type="radio" name="weeklyCommitment" value="usually"> Usually, with some conflicts</label>
-              <label><input type="radio" name="weeklyCommitment" value="limited"> Only on certain days</label>
-            </fieldset>
-          </div>
-
-          <div class="branch" data-branch="design" hidden>
-            <h3>Design &amp; technical work</h3>
-            <label class="field">
-              <span>Describe relevant design or technical experience.</span>
-              <textarea name="designExperience" rows="5"></textarea>
-            </label>
-            <div class="field-grid two-col">
-              <label class="field">
-                <span>Tools, software or systems you use</span>
-                <input type="text" name="designTools" placeholder="Vectorworks, QLab, ETC, Adobe, hand drafting…">
-              </label>
-              <label class="field">
-                <span>Additional portfolio link</span>
-                <input type="url" name="designPortfolioUrl" placeholder="https://">
-              </label>
-            </div>
-            <fieldset class="choice-group">
-              <legend>Have you worked outdoors or in a site-specific setting?</legend>
-              <label><input type="radio" name="siteSpecificExperience" value="yes"> Yes</label>
-              <label><input type="radio" name="siteSpecificExperience" value="some"> A little</label>
-              <label><input type="radio" name="siteSpecificExperience" value="no"> No, but I’m interested</label>
-            </fieldset>
-          </div>
-
-          <div class="branch" data-branch="practice" hidden>
-            <h3>Puppetry, movement &amp; intimacy practice</h3>
-            <label class="field">
-              <span>Describe your relevant puppetry, choreography, movement or intimacy-coordination experience.</span>
-              <textarea name="practiceExperience" rows="5"></textarea>
-            </label>
-            <label class="field">
-              <span>How do you approach consent, trust and communication in a rehearsal room?</span>
-              <textarea name="consentApproach" rows="4"></textarea>
-            </label>
-          </div>
-
-          <div class="branch" data-branch="fabrication" hidden>
-            <h3>Fabrication &amp; build</h3>
-            <label class="field">
-              <span>What materials, tools and construction methods have you worked with?</span>
-              <textarea name="fabricationSkills" rows="5" placeholder="Wood, foam, fabric, papier-mâché, carving, sewing, painting…"></textarea>
-            </label>
-            <fieldset class="choice-group">
-              <legend>Are you generally available for scheduled build calls in October and early November?</legend>
-              <label><input type="radio" name="buildAvailability" value="yes"> Yes</label>
-              <label><input type="radio" name="buildAvailability" value="some"> Some dates</label>
-              <label><input type="radio" name="buildAvailability" value="no"> Mostly independent work only</label>
-            </fieldset>
-          </div>
-
-          <div class="branch" data-branch="operations" hidden>
-            <h3>Show operation</h3>
-            <label class="field">
-              <span>Describe your QLab, light-board or live-show operating experience.</span>
-              <textarea name="operatorExperience" rows="5"></textarea>
-            </label>
-            <div class="field-grid two-col">
-              <label class="field">
-                <span>QLab version / level, if applicable</span>
-                <input type="text" name="qlabExperience" placeholder="e.g. QLab 5, basic / advanced">
-              </label>
-              <label class="field">
-                <span>Lighting consoles used, if applicable</span>
-                <input type="text" name="consoleExperience" placeholder="e.g. ETC Eos family">
-              </label>
-            </div>
-          </div>
-
-          <div class="branch" data-branch="communications" hidden>
-            <h3>Marketing, photography &amp; graphic design</h3>
-            <label class="field">
-              <span>Describe your relevant work and what part of the project interests you.</span>
-              <textarea name="communicationsExperience" rows="5"></textarea>
-            </label>
-            <label class="field">
-              <span>Tools, equipment or platforms you use</span>
-              <input type="text" name="communicationsTools" placeholder="Camera, Adobe, Canva, social platforms…">
-            </label>
-          </div>
-
-          <div class="branch" data-branch="audience" hidden>
-            <h3>Audience &amp; front of house</h3>
-            <label class="field">
-              <span>Tell us about any house-management, event, hospitality or accessibility experience.</span>
-              <textarea name="audienceExperience" rows="5"></textarea>
-            </label>
-          </div>
-
-          <label class="field top-gap">
-            <span>Anything else about your experience or interests?</span>
-            <textarea name="additionalExperience" rows="4"></textarea>
-          </label>
-
-          <div class="step-actions">
-            <button class="button secondary" type="button" data-back>Back</button>
-            <button class="button primary" type="button" data-next>Continue</button>
-          </div>
-        </section>
-
-        <section class="form-step" data-step="4" data-step-name="Availability">
-          <div class="section-heading">
-            <p class="section-number">04</p>
-            <h2>Availability</h2>
-            <p class="section-note">The dates below depend on the roles you checked. Exact call times are still being set.</p>
-          </div>
-
-          <div class="calendar-key">
-            <span class="key-tag required">Essential</span>
-            <span class="key-tag preferred">Preferred</span>
-            <span class="key-tag deadline">Deadline / flexible</span>
-          </div>
-
-          <div id="availability-calendar" class="availability-calendar"></div>
-          <div id="availability-error" class="inline-error" role="alert" hidden>Please answer each visible date.</div>
-
-          <fieldset class="choice-group top-gap">
-            <legend>General availability during Weeks 1–8</legend>
-            <div class="check-grid">
-              <label><input type="checkbox" name="generalAvailability" value="weekday_mornings"> Weekday mornings</label>
-              <label><input type="checkbox" name="generalAvailability" value="weekday_afternoons"> Weekday afternoons</label>
-              <label><input type="checkbox" name="generalAvailability" value="weekday_evenings"> Weekday evenings</label>
-              <label><input type="checkbox" name="generalAvailability" value="saturdays"> Saturdays</label>
-              <label><input type="checkbox" name="generalAvailability" value="sundays"> Sundays</label>
-              <label><input type="checkbox" name="generalAvailability" value="varies"> Varies week to week</label>
-            </div>
-          </fieldset>
-
-          <label class="field top-gap">
-            <span>Known conflicts or recurring commitments</span>
-            <textarea name="conflicts" rows="5" placeholder="Classes, work, travel, recurring rehearsals, etc."></textarea>
-          </label>
-
-          <div class="step-actions">
-            <button class="button secondary" type="button" data-back>Back</button>
-            <button class="button primary" type="button" data-next>Review</button>
-          </div>
-        </section>
-
-        <section class="form-step" data-step="5" data-step-name="Review & submit">
-          <div class="section-heading">
-            <p class="section-number">05</p>
-            <h2>Last step</h2>
-            <p class="section-note">This just tells us you're interested. We'll talk through the role and schedule before anything's confirmed.</p>
-          </div>
-
-          <label class="field">
-            <span>Why does this project interest you?</span>
-            <textarea name="whyInterested" rows="5"></textarea>
-          </label>
-
-          <div class="field-grid two-col">
-            <label class="field">
-              <span>How did you hear about the project?</span>
-              <input type="text" name="referralSource">
-            </label>
-            <label class="field">
-              <span>Anything we should know to make the process more accessible?</span>
-              <input type="text" name="accessNeeds" placeholder="Optional">
-            </label>
-          </div>
-
-          <div id="review-card" class="review-card"></div>
-
-          <label class="consent-line">
-            <input type="checkbox" name="consent" value="yes" required>
-            <span>I confirm that the information above is accurate and understand that submitting this form does not guarantee a position.</span>
-          </label>
-
-          <div id="submit-error" class="inline-error" role="alert" hidden></div>
-
-          <div class="step-actions">
-            <button class="button secondary" type="button" data-back>Back</button>
-            <button class="button primary" id="submit-button" type="submit">Send interest form</button>
-          </div>
-        </section>
-      </form>
-
-      <section id="success-panel" class="success-panel" hidden>
-        <h2 class="received-word">Received</h2>
-        <p>We got your response. We'll be in touch once we've gone through everyone and sorted out roles and schedules.</p>
-        <button class="button secondary" id="submit-another" type="button">Submit another response</button>
-      </section>
-
-      <iframe id="submission-target" name="submission-target" title="Submission response" hidden></iframe>
+      <button id="enter-button" class="enter-button" type="button">
+        &gt;&gt; enter the forest
+      </button>
     </section>
 
-    <footer class="site-footer">
-      <p class="footer-label">Questions?</p>
-      <a class="footer-mail" href="mailto:shochman@stanford.edu">shochman@stanford.edu</a>
-      <div class="footer-base">
-        <span>We&rsquo;re Still Seeing Shadows</span>
-        <span>Sep 21 &mdash; Nov 22</span>
+    <section
+      id="loading-screen"
+      class="screen loading-screen"
+      aria-label="Preparing the document"
+      aria-live="polite"
+      aria-hidden="true"
+      hidden
+    >
+      <p>preparing the document</p>
+      <span id="loader-character" class="loader-character" aria-hidden="true">/</span>
+    </section>
+
+    <section
+      id="document-screen"
+      class="screen document-screen"
+      aria-label="We're Still Seeing Shadows information packet"
+      aria-hidden="true"
+      hidden
+    >
+      <div
+        id="pdf-scroll"
+        class="pdf-scroll"
+        role="document"
+        aria-label="We're Still Seeing Shadows information packet"
+        tabindex="0"
+      >
+        <div id="pdf-pages" class="pdf-pages"></div>
       </div>
-    </footer>
+    </section>
+
+    <noscript>
+      <p class="noscript-message">
+        JavaScript is required to view the information packet.
+        <a href="https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/preview">Open the document</a>.
+      </p>
+    </noscript>
   </main>
 </body>
 </html>
