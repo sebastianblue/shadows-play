@@ -156,16 +156,23 @@ a {
   transform: translateX(-50%);
 }
 
-.loader-character {
+.ascii-loader {
   position: absolute;
   top: 24.7%;
   left: 50%;
-  color: rgba(244, 245, 239, 0.16);
-  font-size: clamp(2.2rem, 3.2vw, 3.35rem);
-  font-style: italic;
+  display: grid;
+  color: rgba(244, 245, 239, 0.72);
+  font-size: clamp(0.72rem, 1.05vw, 0.95rem);
+  font-style: normal;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.08;
+  letter-spacing: 0;
+  white-space: pre;
   transform: translateX(-50%);
+}
+
+.ascii-loader span {
+  display: block;
 }
 
 /* Embedded document */
@@ -281,8 +288,9 @@ a {
     font-size: clamp(1.1rem, 5.2vw, 1.5rem);
   }
 
-  .loader-character {
+  .ascii-loader {
     top: 26%;
+    font-size: 0.72rem;
   }
 }
 
