@@ -3,6 +3,7 @@
   --electric-green: #00FF00;
   --paper: #F4F5EF;
   --document-width: 816px;
+  --document-toolbar-height: 2.75rem;
   --mono: "Sometype Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -140,6 +141,30 @@ a {
   pointer-events: none;
 }
 
+.loading-fallback-link {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  right: 1rem;
+  color: var(--paper);
+  font-size: clamp(0.65rem, 0.75vw, 0.78rem);
+  font-style: italic;
+  opacity: 0;
+  text-underline-offset: 0.2em;
+  animation: reveal-loading-fallback 1ms linear 8s forwards;
+}
+
+.loading-fallback-link:hover,
+.loading-fallback-link:focus-visible {
+  color: var(--electric-green);
+}
+
+@keyframes reveal-loading-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
 .loading-screen p {
   position: absolute;
   top: 9.1%;
@@ -181,9 +206,46 @@ a {
   overflow: hidden;
 }
 
+.document-toolbar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--document-toolbar-height);
+  padding: 0 1rem;
+  background: var(--forest);
+}
+
+.document-source-link {
+  color: var(--paper);
+  font-size: clamp(0.7rem, 0.8vw, 0.82rem);
+  font-style: italic;
+  line-height: 1.2;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 150ms ease;
+}
+
+.document-source-link:hover,
+.document-source-link:focus-visible {
+  color: var(--electric-green);
+}
+
+.document-source-link:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
 .pdf-scroll {
   position: absolute;
-  inset: 0;
+  top: var(--document-toolbar-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <script src="script.js?v=4" defer></script>
 </head>
 
@@ -37,6 +37,12 @@
       hidden
     >
       <p>preparing the document</p>
+      <a
+        class="loading-fallback-link"
+        href="https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/edit?usp=sharing&amp;ouid=101872992108908765312&amp;rtpof=true&amp;sd=true"
+        target="_blank"
+        rel="noopener noreferrer"
+      >taking too long? open in google docs ↗</a>
       <div id="ascii-loader" class="ascii-loader" aria-hidden="true">
         <span>----------</span>
         <span>----------</span>
@@ -53,6 +59,15 @@
       aria-hidden="true"
       hidden
     >
+      <nav class="document-toolbar" aria-label="Document options">
+        <a
+          class="document-source-link"
+          href="https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/edit?usp=sharing&amp;ouid=101872992108908765312&amp;rtpof=true&amp;sd=true"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open the original document in Google Docs (opens in a new tab)"
+        >open in google docs ↗</a>
+      </nav>
       <div
         id="pdf-scroll"
         class="pdf-scroll"
@@ -67,7 +82,7 @@
     <noscript>
       <p class="noscript-message">
         JavaScript is required to view the information packet.
-        <a href="https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/preview">Open the document</a>.
+        <a href="https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/edit?usp=sharing&amp;ouid=101872992108908765312&amp;rtpof=true&amp;sd=true">Open the document</a>.
       </p>
     </noscript>
   </main>
