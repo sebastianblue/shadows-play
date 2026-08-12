@@ -145,9 +145,9 @@ a {
   top: 9.1%;
   left: 50%;
   margin: 0;
-  border-bottom: 2px solid currentColor;
+  border-bottom: 1px solid currentColor;
   color: var(--paper);
-  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+  font-size: clamp(0.78rem, 1vw, 1rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.13;
@@ -285,7 +285,7 @@ a {
 
   .loading-screen p {
     top: 11%;
-    font-size: clamp(1.1rem, 5.2vw, 1.5rem);
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
   }
 
   .ascii-loader {
