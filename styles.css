@@ -74,7 +74,7 @@ a {
 .landing-copy h1 {
   margin: 0;
   color: var(--electric-green);
-  font-size: clamp(2.5rem, 4.65vw, 5rem);
+  font-size: clamp(1.5rem, 2.75vw, 3.25rem);
   font-weight: 600;
   line-height: 1.06;
   letter-spacing: -0.035em;
@@ -84,7 +84,7 @@ a {
 .landing-copy p {
   margin: clamp(2rem, 4vw, 3.4rem) 0 0;
   color: var(--paper);
-  font-size: clamp(1.3rem, 2.23vw, 2.35rem);
+  font-size: clamp(0.85rem, 1.2vw, 1.45rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.25;
@@ -102,7 +102,7 @@ a {
   border-radius: 0;
   color: var(--paper);
   background: transparent;
-  font-size: clamp(1.25rem, 2.14vw, 2.25rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.4rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.12;
@@ -261,19 +261,19 @@ a {
   }
 
   .landing-copy h1 {
-    font-size: clamp(2.1rem, 10vw, 3.75rem);
+    font-size: clamp(1.5rem, 6.3vw, 2.5rem);
     line-height: 1.12;
     white-space: normal;
   }
 
   .landing-copy p {
     margin-top: 2rem;
-    font-size: clamp(1.05rem, 5vw, 1.65rem);
+    font-size: clamp(0.85rem, 3.6vw, 1.15rem);
   }
 
   .enter-button {
     top: 70%;
-    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+    font-size: clamp(0.9rem, 3.8vw, 1.15rem);
   }
 
   .loading-screen p {
