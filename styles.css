@@ -261,7 +261,6 @@ a {
   border: 1px solid currentColor;
   color: var(--electric-green);
   background: rgba(40, 78, 18, 0.96);
-  box-shadow: 0 0 1.5rem rgba(0, 255, 0, 0.12);
   font-size: clamp(0.75rem, 1vw, 0.95rem);
   font-style: italic;
   line-height: 1.2;
