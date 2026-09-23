@@ -10,7 +10,8 @@
   const pdfScroll = document.querySelector("#pdf-scroll");
   const pdfPages = document.querySelector("#pdf-pages");
 
-  const PDF_URL = "https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/export?format=pdf";
+  const configuredPdfUrl = document.documentElement.dataset.pdfUrl;
+  const PDF_URL = configuredPdfUrl || "https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/export?format=pdf";
   const PDF_JS_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
   const PDF_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
   const PAGE_BACKGROUND = "#284E12";
@@ -95,7 +96,7 @@
       const pdfjs = await import(PDF_JS_URL);
       pdfjs.GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
 
-      const pdfSource = window.location.protocol === "file:"
+      const pdfSource = window.location.protocol === "file:" && !configuredPdfUrl
         ? { data: Uint8Array.from(window.atob(INLINE_PDF_BASE64), character => character.charCodeAt(0)) }
         : { url: PDF_URL };
       const loadingTask = pdfjs.getDocument(pdfSource);
