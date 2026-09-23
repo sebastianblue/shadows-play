@@ -1,6 +1,7 @@
 <!doctype html>
 <html
   lang="en"
+  data-direct-document
   data-pdf-url="https://docs.google.com/document/d/1TICVvplOExlU92ysW4kenIKC3bpHJC2MNjJb3PxZHnc/export?format=pdf"
 >
 <head>
@@ -30,53 +31,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=6">
-  <script src="../script.js?v=5" defer></script>
+  <link rel="stylesheet" href="../styles.css?v=8">
+  <script src="../script.js?v=6" defer></script>
 </head>
 
 <body>
   <main class="experience">
-    <section id="landing-screen" class="screen landing-screen" aria-labelledby="site-title">
-      <div class="landing-copy">
-        <h1 id="site-title">we&rsquo;re still seeing shadows</h1>
-        <p>a new immersive nature play with music</p>
-      </div>
-
-      <button id="enter-button" class="enter-button" type="button">
-        &gt;&gt; enter the forest
-      </button>
-    </section>
-
-    <section
-      id="loading-screen"
-      class="screen loading-screen"
-      aria-label="Preparing the audition packet"
-      aria-live="polite"
-      aria-hidden="true"
-      hidden
-    >
-      <p>preparing the document</p>
-      <a
-        class="loading-fallback-link"
-        href="https://docs.google.com/document/d/1TICVvplOExlU92ysW4kenIKC3bpHJC2MNjJb3PxZHnc/edit?usp=sharing"
-        target="_blank"
-        rel="noopener noreferrer"
-      >taking too long? open in google docs ↗</a>
-      <div id="ascii-loader" class="ascii-loader" aria-hidden="true">
-        <span>----------</span>
-        <span>----------</span>
-        <span>----------</span>
-        <span>----------</span>
-        <span>----------</span>
-      </div>
-    </section>
-
     <section
       id="document-screen"
       class="screen document-screen"
       aria-label="We're Still Seeing Shadows audition packet"
-      aria-hidden="true"
-      hidden
+      aria-hidden="false"
     >
       <nav class="document-toolbar" aria-label="Document options">
         <a
@@ -86,6 +51,10 @@
           rel="noopener noreferrer"
           aria-label="Open the audition packet in Google Docs (opens in a new tab)"
         >open in google docs ↗</a>
+        <a
+          class="document-route-link"
+          href="../"
+        >information packet →</a>
       </nav>
       <div
         id="pdf-scroll"
@@ -97,6 +66,14 @@
         <div id="pdf-pages" class="pdf-pages"></div>
       </div>
     </section>
+
+    <a
+      class="audition-form-floater"
+      href="https://forms.gle/Q117WqELcKbKFpiZA"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open the audition signup form (opens in a new tab)"
+    >&gt;&gt; fill out the audition form ↗</a>
 
     <noscript>
       <p class="noscript-message">

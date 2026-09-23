@@ -215,12 +215,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
   height: var(--document-toolbar-height);
   padding: 0 1rem;
   background: var(--forest);
 }
 
-.document-source-link {
+.document-source-link,
+.document-route-link {
   color: var(--paper);
   font-size: clamp(0.7rem, 0.8vw, 0.82rem);
   font-style: italic;
@@ -231,13 +233,50 @@ a {
 }
 
 .document-source-link:hover,
-.document-source-link:focus-visible {
+.document-source-link:focus-visible,
+.document-route-link:hover,
+.document-route-link:focus-visible {
   color: var(--electric-green);
 }
 
-.document-source-link:focus-visible {
+.document-source-link:focus-visible,
+.document-route-link:focus-visible {
   outline: 1px solid currentColor;
   outline-offset: 4px;
+}
+
+.document-error {
+  margin: 4rem auto;
+  color: var(--paper);
+  font-size: clamp(0.78rem, 1vw, 1rem);
+  font-style: italic;
+}
+
+.audition-form-floater {
+  position: fixed;
+  z-index: 3;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid currentColor;
+  color: var(--electric-green);
+  background: rgba(40, 78, 18, 0.96);
+  box-shadow: 0 0 1.5rem rgba(0, 255, 0, 0.12);
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  font-style: italic;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.audition-form-floater:hover,
+.audition-form-floater:focus-visible {
+  color: var(--forest);
+  background: var(--electric-green);
+  box-shadow: 0 0 2rem rgba(0, 255, 0, 0.24);
+  outline: none;
 }
 
 .pdf-scroll {
@@ -321,6 +360,34 @@ a {
 
 .noscript-message a {
   color: inherit;
+}
+
+/* Not found */
+
+.not-found-page {
+  display: grid;
+  place-items: center;
+  background: var(--forest);
+}
+
+.not-found-image-link {
+  display: block;
+  width: min(100vw, 1616px);
+  max-height: 100vh;
+  max-height: 100dvh;
+  outline-offset: -4px;
+}
+
+.not-found-image {
+  display: block;
+  width: 100%;
+  max-height: 100vh;
+  max-height: 100dvh;
+  object-fit: contain;
+}
+
+.not-found-image-link:focus-visible {
+  outline: 2px solid var(--electric-green);
 }
 
 @media (max-width: 760px) {

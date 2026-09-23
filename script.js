@@ -6,10 +6,11 @@
   const documentScreen = document.querySelector("#document-screen");
   const enterButton = document.querySelector("#enter-button");
   const asciiLoader = document.querySelector("#ascii-loader");
-  const asciiRows = [...asciiLoader.querySelectorAll("span")];
+  const asciiRows = asciiLoader ? [...asciiLoader.querySelectorAll("span")] : [];
   const pdfScroll = document.querySelector("#pdf-scroll");
   const pdfPages = document.querySelector("#pdf-pages");
 
+  const directDocument = document.documentElement.hasAttribute("data-direct-document");
   const configuredPdfUrl = document.documentElement.dataset.pdfUrl;
   const PDF_URL = configuredPdfUrl || "https://docs.google.com/document/d/1HqrQDeOyaaiQIRB-m9CB04m_nCMFdTwE/export?format=pdf";
   const PDF_JS_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
@@ -73,6 +74,13 @@
     if (documentRevealed) return;
     documentRevealed = true;
     window.clearInterval(loaderTimer);
+
+    if (directDocument) {
+      documentScreen.hidden = false;
+      documentScreen.setAttribute("aria-hidden", "false");
+      pdfScroll.focus({ preventScroll: true });
+      return;
+    }
 
     const elapsed = performance.now() - loadingStartedAt;
     const delay = Math.max(0, minimumLoadingTime - elapsed);
@@ -168,6 +176,15 @@
       revealDocument();
     } catch (error) {
       console.error("The document could not be rendered.", error);
+
+      if (directDocument) {
+        const message = document.createElement("p");
+        message.className = "document-error";
+        message.textContent = "the document could not load";
+        pdfPages.appendChild(message);
+        return;
+      }
+
       asciiLoader.textContent = "!";
       asciiLoader.setAttribute("aria-hidden", "false");
       loadingScreen.querySelector("p").textContent = "the document could not load";
@@ -184,5 +201,10 @@
     renderDocument();
   }
 
-  enterButton.addEventListener("click", requestDocument);
+  if (directDocument) {
+    documentRequested = true;
+    renderDocument();
+  } else {
+    enterButton.addEventListener("click", requestDocument);
+  }
 })();
