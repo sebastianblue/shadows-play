@@ -63,7 +63,7 @@
     node.innerHTML = performances.map(p => {
       const left = p.remaining + (p.id === current ? admissions : 0);
       const ended = closed(p), full = left < admissions;
-      return `<label class="night-option"><input type="radio" name="${escape(name)}" value="${escape(p.id)}" required ${ended || full ? 'disabled' : ''} ${selected === p.id ? 'checked' : ''}><span class="performance-description">${escape(p.label)} · ${escape(time(p.time))} Pacific<span class="availability">${ended ? 'closed' : full ? (left === 0 ? 'full' : 'not enough places for your group') : `${left} places available`}</span></span></label>`;
+      return `<label class="night-option"><input type="radio" name="${escape(name)}" value="${escape(p.id)}" required ${ended || full ? 'disabled' : ''} ${selected === p.id ? 'checked' : ''}><span class="performance-description">${escape(p.label)}, ${escape(time(p.time))} Pacific<span class="availability">${ended ? 'closed' : full ? (left === 0 ? 'full' : 'not enough places for your group') : `${left} places available`}</span></span></label>`;
     }).join('');
   }
   function publicBase() { return isPreview ? window.location.origin : config.publicUrl.replace(/\/$/, ''); }

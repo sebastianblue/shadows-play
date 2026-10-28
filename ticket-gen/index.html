@@ -5,10 +5,10 @@
   <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#274e13"><title>invitations — shadows</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../ticketing/tickets.css">
+  <link rel="stylesheet" href="../ticketing/tickets.css?v=20261028-minimal">
   <script src="../ticketing/config.js?v=live-20261028" defer></script><script src="../ticketing/runtime.js" defer></script>
   <script src="../ticketing/vendor/pdf-lib.min.js" defer></script><script src="../ticketing/vendor/fontkit.umd.min.js" defer></script>
-  <script src="../ticketing/shared.js" defer></script><script src="../ticketing/cards.js" defer></script><script src="../ticketing/generator.js" defer></script>
+  <script src="../ticketing/shared.js?v=20261028-minimal" defer></script><script src="../ticketing/cards.js" defer></script><script src="../ticketing/generator.js?v=20261028-minimal" defer></script>
 </head>
 <body data-page="generator">
 <main class="shell">
@@ -38,7 +38,6 @@
       <div class="field"><label for="ticket-count">how many tickets do you want to give?</label><div class="stepper"><button id="decrease" type="button" aria-label="One fewer ticket">−</button><input id="ticket-count" type="number" value="2" min="1" max="20" required aria-label="Number of tickets"><button id="increase" type="button" aria-label="One more ticket">+</button></div></div>
       <fieldset class="distribution"><legend>do you want these on separate invites or on the same card?</legend><label class="choice"><input type="radio" name="distribution" value="separate" checked><span>separate invitations</span></label><label class="choice"><input type="radio" name="distribution" value="together"><span>all on the same card</span></label></fieldset>
       <div class="field"><p class="field-label">names on the invitations (optional)</p><div id="recipient-fields"></div></div>
-      <p id="generation-summary" aria-live="polite"></p>
       <button class="primary" type="submit" id="generate-button">generate</button>
       <p id="generator-error" class="message error" role="alert" hidden></p>
     </form>

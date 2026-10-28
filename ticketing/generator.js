@@ -14,7 +14,6 @@
       saveNames(); lastDistribution = distribution();
       $('recipient-fields').innerHTML = Array.from({ length: number }, (_, i) => `<label class="sr-only" for="recipient-${i}">${together ? 'Group name' : `Recipient ${i + 1}`}</label><input id="recipient-${i}" class="recipient-input" maxlength="100" placeholder="${together ? 'e.g. Vivi & friends' : `name on invitation ${i + 1}`}" value="${T.escape(recipientDrafts[lastDistribution][i] || '')}">`).join('');
     }
-    $('generation-summary').textContent = together ? `1 card · 1 unique code · ${tickets} ${tickets === 1 ? 'admission' : 'admissions'} together` : `${tickets} ${tickets === 1 ? 'card' : 'cards'} · ${tickets} unique ${tickets === 1 ? 'code' : 'codes'} · 1 admission each`;
   }
   async function enter() {
     const status = await T.api('dashboard', { session });
@@ -82,7 +81,7 @@
     }, 'preparing your PDF…');
   });
   $('copy-links').addEventListener('click', async () => {
-    try { await T.copy(issued.map(i => `${i.recipient || 'An invitation for you'} · ${i.admissions} ${i.admissions === 1 ? 'entry' : 'entries'}\nGo to ${T.publicBase()}/reserve and enter: ${i.code}`).join('\n\n')); T.message('results-message', 'Codes copied.'); }
+    try { await T.copy(issued.map(i => `${i.recipient || 'An invitation for you'}\n${i.admissions} ${i.admissions === 1 ? 'entry' : 'entries'}\nGo to ${T.publicBase()}/reserve and enter: ${i.code}`).join('\n\n')); T.message('results-message', 'Codes copied.'); }
     catch (error) { T.message('results-message', error.message, true); }
   });
   document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', async () => {
@@ -101,7 +100,7 @@
     } catch (error) { T.message('dashboard-error', error.message, true); }
   }
   function renderDashboard() {
-    $('performance-stats').innerHTML = dashboard.performances.map(p => `<section class="stat-card"><p class="stat-date">${T.escape(p.label)}</p><p class="stat-number">${p.reserved}<span class="stat-caption"> / ${p.capacity}</span></p><p class="stat-caption">${p.remaining} places left · ${T.time(p.time)}</p><div class="capacity-track"><span style="width:${Math.min(100, p.reserved / p.capacity * 100)}%"></span></div><form class="performance-editor" data-performance="${p.id}"><label>capacity<input name="capacity" type="number" min="${Math.max(1, p.reserved)}" max="500" value="${p.capacity}" required></label><label>start time<input name="time" type="time" value="${p.time}" required></label><button type="submit" class="secondary">save</button></form></section>`).join('');
+    $('performance-stats').innerHTML = dashboard.performances.map(p => `<section class="stat-card"><p class="stat-date">${T.escape(p.label)}</p><p class="stat-number">${p.reserved}<span class="stat-caption"> / ${p.capacity}</span></p><p class="stat-caption">${p.remaining} places left, ${T.time(p.time)}</p><div class="capacity-track"><span style="width:${Math.min(100, p.reserved / p.capacity * 100)}%"></span></div><form class="performance-editor" data-performance="${p.id}"><label>capacity<input name="capacity" type="number" min="${Math.max(1, p.reserved)}" max="500" value="${p.capacity}" required></label><label>start time<input name="time" type="time" value="${p.time}" required></label><button type="submit" class="secondary">save</button></form></section>`).join('');
     $('performance-stats').querySelectorAll('form').forEach(editor => editor.addEventListener('submit', async event => {
       event.preventDefault();
       await T.busy(event.submitter, async () => {
@@ -111,7 +110,7 @@
     }));
     renderTables();
   }
-  function table(headers, rows) { return rows.length ? `<table><thead><tr>${headers.map(h => `<th scope="col">${T.escape(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(cells => `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>` : '<p class="empty-state">Nothing here yet. The forest has room.</p>'; }
+  function table(headers, rows) { return rows.length ? `<table><thead><tr>${headers.map(h => `<th scope="col">${T.escape(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(cells => `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>` : ''; }
   function renderTables() {
     if (!dashboard) return;
     const q = $('guest-search').value.trim().toLowerCase();
