@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#274e13"><title>invitations — shadows</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../ticketing/tickets.css">
+  <script src="../ticketing/config.js" defer></script><script src="../ticketing/runtime.js" defer></script>
+  <script src="../ticketing/vendor/pdf-lib.min.js" defer></script><script src="../ticketing/vendor/fontkit.umd.min.js" defer></script>
+  <script src="../ticketing/shared.js" defer></script><script src="../ticketing/cards.js" defer></script><script src="../ticketing/generator.js" defer></script>
+</head>
+<body data-page="generator">
+<main class="shell">
+<pre class="deer" aria-label="deer"> /|        |\
+`__\\      //__'
+  ||      ||
+ \__`\    /'__/
+   `_\\  //_'
+   _.,:---;,._
+   \_:     :_/
+     |@. .@|
+     |     |
+      \.-./
+       `-'  * *</pre>
+<section id="team-login">
+  <h1>invitations</h1>
+  <form id="login-form"><label for="team-password">team password</label><input type="password" id="team-password" autocomplete="current-password" required maxlength="200"><button type="submit" class="primary">enter</button></form>
+  <p id="login-error" class="message error" role="alert" hidden></p>
+  <p id="unconfigured" hidden>The invitation desk is not open yet.</p>
+</section>
+<section id="team-workspace" hidden>
+  <div class="workspace-nav"><div class="tabs"><button type="button" data-tab="generate" class="tab active" aria-pressed="true">generate</button><button type="button" data-tab="dashboard" class="tab" aria-pressed="false">guest list</button></div><button type="button" class="text-button" id="logout">sign out</button></div>
+  <section id="generate-view">
+    <h1>invitations</h1>
+    <form id="generator-form">
+      <div class="field"><label for="inviter">your name</label><input id="inviter" name="inviter" required maxlength="100" autocomplete="name"></div>
+      <div class="field"><label for="ticket-count">how many tickets do you want to give?</label><div class="stepper"><button id="decrease" type="button" aria-label="One fewer ticket">−</button><input id="ticket-count" type="number" value="2" min="1" max="20" required aria-label="Number of tickets"><button id="increase" type="button" aria-label="One more ticket">+</button></div></div>
+      <fieldset class="distribution"><legend>do you want these on separate invites or on the same card?</legend><label class="choice"><input type="radio" name="distribution" value="separate" checked><span>separate invitations</span></label><label class="choice"><input type="radio" name="distribution" value="together"><span>all on the same card</span></label></fieldset>
+      <div class="field"><p class="field-label">names on the invitations (optional)</p><div id="recipient-fields"></div></div>
+      <p id="generation-summary" aria-live="polite"></p>
+      <button class="primary" type="submit" id="generate-button">generate</button>
+      <p id="generator-error" class="message error" role="alert" hidden></p>
+    </form>
+    <section id="generated-results" class="generated-results" hidden aria-labelledby="results-title"><h2 id="results-title">invitations</h2><div class="button-row"><button id="download-pdf" class="primary" type="button">download pdf</button><button id="copy-links" class="secondary" type="button">copy codes</button></div><div id="issued-cards" class="issued-cards"></div><p id="results-message" class="message" role="status" hidden></p></section>
+  </section>
+  <section id="dashboard-view" hidden><h1>guest list</h1><button id="refresh-dashboard" type="button">refresh</button><p id="dashboard-error" class="message error" role="alert" hidden></p><div id="performance-stats" class="performance-stats"></div><h2>reservations</h2><button type="button" id="export-guests">download guest list</button><label class="sr-only" for="guest-search">Search guest list</label><input id="guest-search" class="search-field" type="search" placeholder="search"><div id="reservations-table" class="table-scroll"></div><h2>invitations</h2><div id="invitations-table" class="table-scroll"></div></section>
+</section>
+<noscript><p>Please enable JavaScript to use the invitation desk.</p></noscript>
+</main>
+</body>
+</html>

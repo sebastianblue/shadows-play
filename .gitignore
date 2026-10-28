@@ -1,0 +1,7 @@
+node_modules/
+.preview/
+ticketing/output/
+ticketing/tmp/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#274e13"><title>reserve — shadows</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../ticketing/tickets.css">
+  <script src="../ticketing/config.js" defer></script><script src="../ticketing/runtime.js" defer></script>
+  <script src="../ticketing/shared.js" defer></script><script src="../ticketing/reserve.js" defer></script>
+</head>
+<body data-page="reserve">
+<main class="shell reserve-shell">
+<pre class="deer" aria-label="deer"> /|        |\
+`__\\      //__'
+  ||      ||
+ \__`\    /'__/
+   `_\\  //_'
+   _.,:---;,._
+   \_:     :_/
+     |@. .@|
+     |     |
+      \.-./
+       `-'  * *</pre>
+<section id="code-step"><h1>reserve</h1><form id="code-form"><fieldset class="distribution"><legend class="sr-only">what would you like to do?</legend><label class="choice"><input type="radio" name="intent" value="reserve" checked><span>reserve a spot</span></label><label class="choice"><input type="radio" name="intent" value="manage"><span>change details</span></label></fieldset><div class="field"><label for="invitation-code">your special code</label><input id="invitation-code" name="code" autocomplete="off" autocapitalize="none" spellcheck="false" required maxlength="100"></div><div id="manage-email-field" class="field" hidden><label for="manage-email">email used for your booking</label><input id="manage-email" name="bookingEmail" type="email" autocomplete="email" maxlength="254"></div><button class="primary" type="submit">continue</button></form><p id="code-error" class="message error" role="alert" hidden></p></section>
+<section id="booking-step" hidden><h1>reserve</h1><p id="invitation-description"></p><form id="booking-form"><fieldset class="performance-picker"><legend>which night?</legend><div id="performance-options" class="performance-options"></div></fieldset><div class="field"><label for="guest-name">name</label><input id="guest-name" name="name" autocomplete="name" required maxlength="100"></div><div class="field"><label for="guest-email">email</label><input type="email" id="guest-email" name="email" autocomplete="email" required maxlength="254"></div><div class="field"><label for="access-needs">access needs or a note (optional)</label><textarea id="access-needs" name="accessNeeds" rows="2" maxlength="1000"></textarea></div><div class="honeypot" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div><label class="consent"><input id="booking-consent" type="checkbox" required><span>The production team can use my details to manage this booking and contact me about the performance.</span></label><button type="submit" class="primary" id="reserve-button">reserve</button><p id="booking-error" class="message error" role="alert" hidden></p></form><button id="back-to-code" type="button" class="text-button">use a different code</button></section>
+<section id="confirmation-step" hidden tabindex="-1"><h1 id="confirmation-title">reserved</h1><div id="reservation-detail" class="reservation-detail"></div><p id="confirmation-note">The team will send meeting details closer to the performance.</p><p id="booking-code-reminder"></p><button id="save-booking" type="button">download details</button><p>No email has been sent.</p><div id="manage-controls" class="manage-controls"><button id="change-booking" type="button" class="text-button">change details</button><button id="cancel-booking" type="button" class="text-button">cancel reservation</button></div><div id="change-panel" hidden><form id="change-form"><fieldset class="performance-picker"><legend>night</legend><div id="change-options" class="performance-options"></div></fieldset><div class="field"><label for="edit-name">name</label><input id="edit-name" name="newName" required maxlength="100" autocomplete="name"></div><div class="field"><label for="edit-email">email</label><input id="edit-email" name="newEmail" type="email" required maxlength="254" autocomplete="email"></div><div class="field"><label for="edit-access">access needs or a note (optional)</label><textarea id="edit-access" name="accessNeeds" rows="2" maxlength="1000"></textarea></div><div class="button-row"><button type="submit">save</button><button id="close-change" type="button">keep my details</button></div></form></div><div id="cancel-panel" hidden><p>Cancel all places in this booking? This invitation code cannot be reused.</p><div class="button-row"><button id="confirm-cancel" type="button">cancel booking</button><button id="keep-booking" type="button">keep booking</button></div></div><button id="back-to-start" type="button" class="text-button">back</button><p id="manage-message" class="message" role="status" hidden></p></section>
+<noscript><p>Please enable JavaScript to reserve.</p></noscript>
+</main>
+</body>
+</html>

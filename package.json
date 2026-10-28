@@ -1,0 +1,14 @@
+{
+  "name": "shadows-invitations",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "preview": "node ticketing/preview-server.cjs",
+    "test": "node --test ticketing/tests/*.test.cjs",
+    "vendor": "node ticketing/vendor.cjs"
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "pdf-lib": "1.17.1"
+  }
+}
