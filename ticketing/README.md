@@ -35,7 +35,9 @@ The tests cover real concurrent HTTP booking attempts, persistence across a rest
 
 ## Connect Google Sheets before opening real reservations
 
-The published pages intentionally remain closed while `ticketing/config.js` has an empty `apiUrl`. Local preview uses its own server. No Google spreadsheet or Apps Script deployment is connected yet.
+The public pages are connected to the Apps Script deployment in `ticketing/config.js`. The production Google Sheet is [Shadows — invitations & reservations](https://docs.google.com/spreadsheets/d/1jQYXOXXAk8c-bHnsN-AIjONHv-E-ypT6yCKk_P3usCA/edit), owned by `shochman@stanford.edu`. Local preview continues to use its own separate server and local data.
+
+To set up a replacement deployment, use the steps below. Clearing `apiUrl` closes public reservations without changing any existing bookings.
 
 1. Create a private Google Sheet for the show's guest list. Open **Extensions → Apps Script**.
 2. Copy `backend/Code.gs` into **Code.gs**. Add two more script files: **Core.gs** from `backend/Core.js`, and **Words.gs** from `backend/Words.js`.

@@ -1,6 +1,5 @@
 window.SHADOWS_TICKETS = Object.freeze({
-  // Set this to the deployed Apps Script URL ending in /exec to open reservations.
-  apiUrl: "",
+  apiUrl: "https://script.google.com/macros/s/AKfycbyWchbhFae-rOuibkIwf2yHWM1sEUNVXcbWUeytv1-2LJVXPIbjsv-q-jexEUcfxkN1nQ/exec",
   publicUrl: "https://stillseeingshadows.com",
   title: "we’re still seeing shadows"
 });
