@@ -2,7 +2,7 @@
   'use strict';
   const T = Tickets, $ = id => document.getElementById(id);
   let session = sessionStorage.getItem('shadows-team-session') || '';
-  let issued = [], dashboard = null, issueId = T.uid();
+  let issued = [], dashboard = null, issueId = T.uid(), performanceRequest = null;
   let recipientDrafts = { separate: [], together: [] }, lastDistribution = 'separate';
   const form = $('generator-form');
   function distribution() { return form.elements.distribution.value; }
@@ -15,12 +15,22 @@
       $('recipient-fields').innerHTML = Array.from({ length: number }, (_, i) => `<label class="sr-only" for="recipient-${i}">${together ? 'Group name' : `Recipient ${i + 1}`}</label><input id="recipient-${i}" class="recipient-input" maxlength="100" placeholder="${together ? 'e.g. Vivi & friends' : `name on invitation ${i + 1}`}" value="${T.escape(recipientDrafts[lastDistribution][i] || '')}">`).join('');
     }
   }
-  async function enter() {
-    const status = await T.api('dashboard', { session });
-    InvitationCards.setPerformances(status.performances);
+  function ensurePerformances() {
+    if (!performanceRequest) {
+      performanceRequest = T.api('availability').then(status => {
+        InvitationCards.setPerformances(status.performances);
+        return status;
+      }).catch(error => { performanceRequest = null; throw error; });
+    }
+    return performanceRequest;
+  }
+  function enter() {
     $('team-login').hidden = true; $('team-workspace').hidden = false;
     $('inviter').value = sessionStorage.getItem('shadows-inviter') || '';
     refreshPreview(true);
+    // Public performance times can load while the cast member fills out the
+    // form. Only the guest-list tab needs the protected dashboard request.
+    ensurePerformances().catch(() => {});
   }
   if (!T.configured) { $('login-form').hidden = true; $('unconfigured').hidden = false; }
   $('login-form').addEventListener('submit', async event => {
@@ -29,11 +39,11 @@
       try {
         const result = await T.api('login', { password: $('team-password').value });
         session = result.session; sessionStorage.setItem('shadows-team-session', session); $('team-password').value = '';
-        await enter();
+        enter();
       } catch (error) { T.message('login-error', error.message, true); }
     });
   });
-  $('logout').addEventListener('click', () => { sessionStorage.removeItem('shadows-team-session'); session = ''; dashboard = null; issued = []; $('issued-cards').replaceChildren(); $('generated-results').hidden = true; $('reservations-table').replaceChildren(); $('invitations-table').replaceChildren(); $('team-workspace').hidden = true; $('team-login').hidden = false; $('team-password').focus(); });
+  $('logout').addEventListener('click', () => { sessionStorage.removeItem('shadows-team-session'); session = ''; dashboard = null; issued = []; performanceRequest = null; $('issued-cards').replaceChildren(); $('generated-results').hidden = true; $('reservations-table').replaceChildren(); $('invitations-table').replaceChildren(); $('team-workspace').hidden = true; $('team-login').hidden = false; $('team-password').focus(); });
   $('decrease').addEventListener('click', () => { $('ticket-count').value = Math.max(1, count() - 1); refreshPreview(true); });
   $('increase').addEventListener('click', () => { $('ticket-count').value = Math.min(20, count() + 1); refreshPreview(true); });
   $('ticket-count').addEventListener('change', () => refreshPreview(true));
@@ -43,6 +53,7 @@
     event.preventDefault(); T.message('generator-error', '');
     await T.busy(event.submitter, async () => {
       try {
+        await ensurePerformances();
         const inviter = $('inviter').value.trim();
         const result = await T.api('issue', { session, inviter, tickets: Number($('ticket-count').value), distribution: distribution(), recipients: Array.from($('recipient-fields').querySelectorAll('input'), i => i.value.trim()), requestId: issueId });
         issued = result.invitations; issueId = T.uid();
@@ -132,5 +143,10 @@
     T.download(new Blob(['\uFEFF' + rows.map(row => row.map(T.csvCell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), 'shadows-guest-list.csv');
   });
   refreshPreview(true);
-  if (session && T.configured) enter().catch(() => { sessionStorage.removeItem('shadows-team-session'); session = ''; });
+  if (session && T.configured) {
+    // This expiry check only restores the public generator form. Every write
+    // and every guest-list request still verifies the signed session server-side.
+    if (Number(session.split('.')[0]) > Date.now()) enter();
+    else { sessionStorage.removeItem('shadows-team-session'); session = ''; }
+  }
 })();
