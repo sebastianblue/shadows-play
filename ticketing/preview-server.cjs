@@ -84,4 +84,4 @@ const server = http.createServer(async (req, res) => {
     res.end(req.method === 'HEAD' ? '' : fs.readFileSync(filename));
   } catch { res.writeHead(404, { 'Content-Type': 'text/plain' }).end('The path disappears here.'); }
 });
-server.listen(port, '127.0.0.1', () => console.log(`Shadows invitation preview: ${origin}/ticket-gen/\nBookings are stored only on this computer.`));
+server.listen(port, '127.0.0.1', () => console.log(`Shadows invitation preview: ${origin}/tickets/\nBookings are stored only on this computer.`));

@@ -1,6 +1,6 @@
 # Shadows invitations
 
-This adds `/ticket-gen/` and `/reserve/` to the existing GitHub Pages site. The home page is unchanged.
+This adds `/tickets/` and `/reserve/` to the existing GitHub Pages site. The old `/ticket-gen/` address redirects to `/tickets/`. The home page is unchanged.
 
 The pages use Sometype Mono, the centered ASCII deer, and background `#274e13`. The printable cards follow the supplied ticket reference. There are no QR codes.
 
@@ -23,7 +23,7 @@ npm install
 npm run preview
 ```
 
-Open <http://127.0.0.1:4177/ticket-gen/> or <http://127.0.0.1:4177/reserve/>. The password is read from `.preview/admin-password` or the `SHADOWS_PREVIEW_PASSWORD` environment variable. A fresh checkout without either uses `forest-preview` for local testing only.
+Open <http://127.0.0.1:4177/tickets/> or <http://127.0.0.1:4177/reserve/>. The password is read from `.preview/admin-password` or the `SHADOWS_PREVIEW_PASSWORD` environment variable. A fresh checkout without either uses `forest-preview` for local testing only.
 
 Local events are saved in `.preview/invitations.jsonl`. This directory is ignored by Git and blocked by the preview server. Preview bookings do not reserve real seats. PDFs made in the preview contain a local-test label and local website address.
 
