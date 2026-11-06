@@ -38,7 +38,7 @@ function doPost(e) {
     if (!raw || raw.length > 20000) throw new Error('Invalid request size.');
     input = JSON.parse(raw);
     if (!/^[a-f0-9]{32}$/.test(input.transportId || '')) throw new Error('Invalid request.');
-    lock.waitLock(30000); locked = true;
+    if (input.action !== 'roster') { lock.waitLock(30000); locked = true; }
     var props = PropertiesService.getScriptProperties();
     if (!props.getProperty('PASSWORD_HASH')) throw new Error('Reservations are not open yet.');
     // Apps Script does not provide a trustworthy client IP. A bounded global
@@ -50,8 +50,7 @@ function doPost(e) {
       if (count >= 60) throw new Error('Please wait a minute and try again.');
       cache.put(key, String(count + 1), 120);
     }
-    var spreadsheet = SpreadsheetApp.openById(props.getProperty('SPREADSHEET_ID'));
-    var state = loadState_(spreadsheet);
+    var spreadsheet, state;
     var changed = false;
     var runtime = {
       now: function () { return new Date().toISOString(); },
@@ -62,6 +61,7 @@ function doPost(e) {
       },
       equal: equal_,
       checkPassword: function (password) { return equal_(digest_(props.getProperty('PASSWORD_SALT') + password), props.getProperty('PASSWORD_HASH')); },
+      teamNames: function () { return JSON.parse(props.getProperty('TEAM_NAMES') || '[]'); },
       issueSession: function () {
         var value = String(Date.now() + 8 * 60 * 60 * 1000) + '.' + Utilities.getUuid().replace(/-/g, '');
         return value + '.' + hmac_(value, props.getProperty('SESSION_SECRET'));
@@ -77,6 +77,10 @@ function doPost(e) {
         changed = true;
       }
     };
+    if (input.action !== 'roster') {
+      spreadsheet = SpreadsheetApp.openById(props.getProperty('SPREADSHEET_ID'));
+      state = loadState_(spreadsheet);
+    }
     result = Object.assign({ ok: true }, ShadowsTickets.perform(state, input, runtime));
     if (changed || input.action === 'dashboard') {
       try { syncSheets_(spreadsheet, state); SpreadsheetApp.flush(); }

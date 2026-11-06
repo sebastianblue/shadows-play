@@ -51,6 +51,8 @@ To set up a replacement deployment, use the steps below. Clearing `apiUrl` close
 
 After changing Apps Script source, publish a new deployment version. Never put the old recruitment-form deployment URL into this configuration: that is a separate service.
 
+The generator's name suggestions come from `TEAM_NAMES` in Apps Script's Script properties, stored as a JSON array of names. Update that private property to change the suggestions. In local preview, `.preview/team-names.json` can supply a test list.
+
 ## Sheet behavior
 
 The hidden Events tab is the durable source of truth. Every mutation is appended under a script-wide lock before a successful response is returned. The three visible tabs are rebuilt from this journal. If rebuilding fails after a booking has saved, the booking still succeeds and the team dashboard retries the projection. Do not manually change or delete Events rows. Edit capacity and time in the team page; editing the visible spreadsheet summaries does not change the reservation engine.

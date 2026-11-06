@@ -96,7 +96,11 @@ var ShadowsTickets = (function () {
     if (action === 'availability') return { performances: availability(state) };
     if (action === 'login') {
       if (!runtime.checkPassword(text(input.password, 200, true))) fail('That team password does not match.', 'AUTH');
-      return { session: runtime.issueSession() };
+      return { session: runtime.issueSession(), teamNames: runtime.teamNames ? runtime.teamNames() : [] };
+    }
+    if (action === 'roster') {
+      admin();
+      return { teamNames: runtime.teamNames() };
     }
     if (action === 'lookup') {
       var i = findInvitation();

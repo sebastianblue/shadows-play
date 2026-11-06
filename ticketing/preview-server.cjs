@@ -13,6 +13,7 @@ if (!fs.existsSync(secretFile)) fs.writeFileSync(secretFile, crypto.randomBytes(
 const secret = fs.readFileSync(secretFile, 'utf8');
 const passwordFile = path.join(dataDir, 'admin-password');
 const password = process.env.SHADOWS_PREVIEW_PASSWORD || (fs.existsSync(passwordFile) ? fs.readFileSync(passwordFile, 'utf8').trim() : 'forest-preview');
+const namesFile = path.join(dataDir, 'team-names.json');
 const port = Number(process.env.PORT || 4177);
 const origin = `http://127.0.0.1:${port}`;
 const attempts = new Map();
@@ -25,6 +26,7 @@ function sign(value) { return crypto.createHmac('sha256', secret).update(value).
 const runtime = {
   now: () => new Date().toISOString(), random: n => crypto.randomBytes(n).toString('hex'), equal,
   checkPassword: value => equal(value, password),
+  teamNames: () => fs.existsSync(namesFile) ? JSON.parse(fs.readFileSync(namesFile, 'utf8')) : ['Preview Cast Member'],
   issueSession() { const value = `${Date.now() + 8 * 60 * 60 * 1000}.${crypto.randomBytes(16).toString('hex')}`; return `${value}.${sign(value)}`; },
   verifySession(token) {
     if (typeof token !== 'string' || token.length > 200) return false;

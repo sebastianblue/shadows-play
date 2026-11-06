@@ -40,6 +40,20 @@
     ].join('\n');
     return { subject, body };
   }
+  function filename(invitations) {
+    const names = invitations.map(({ recipient, code }) =>
+      (recipient || '').normalize('NFC').replace(/[^\p{L}\p{M}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || code.replace(/ /g, '-')
+    );
+    const prefix = invitations.length === 1 ? 'shadows-invitation' : 'shadows-invitations';
+    const encoder = new TextEncoder();
+    let stem = '', bytes = 0;
+    for (const character of `${prefix}-${names.join('_')}`) {
+      bytes += encoder.encode(character).length;
+      if (bytes > 220) return `${stem.replace(/[-_]+$/, '')}-etc.pdf`;
+      stem += character;
+    }
+    return `${stem}.pdf`;
+  }
   let fontBytes;
   async function createPDF(invitations) {
     const { PDFDocument, rgb } = PDFLib;
@@ -89,5 +103,5 @@
     }
     return pdf.save();
   }
-  window.InvitationCards = { card, createPDF, setPerformances, emailDraft };
+  window.InvitationCards = { card, createPDF, filename, setPerformances, emailDraft };
 })();
