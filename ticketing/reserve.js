@@ -13,6 +13,7 @@
   document.querySelectorAll('[name=intent]').forEach(input => input.addEventListener('change', updateIntent));
   async function lookup() {
     const result = await T.api('lookup', { code: $('invitation-code').value });
+    if (invitation?.code !== result.invitation.code) $('nature-memory').value = '';
     invitation = result.invitation; performances = result.performances;
     $('invitation-description').textContent = `${invitation.recipient ? `${invitation.recipient}, this` : 'This'} invitation admits ${invitation.admissions === 1 ? 'one person' : `${invitation.admissions} people, together at the same performance`}.`;
     $('guest-name').value = invitation.admissions === 1 ? invitation.recipient : '';
@@ -37,7 +38,8 @@
     await T.busy(event.submitter, async () => {
       try {
         const result = await T.api('reserve', { code: invitation.code, requestId: reserveId, performanceId: event.target.elements.performance.value,
-          name: $('guest-name').value.trim(), email: $('guest-email').value.trim(), accessNeeds: $('access-needs').value.trim(), website: $('website').value, consent: $('booking-consent').checked });
+          name: $('guest-name').value.trim(), email: $('guest-email').value.trim(), accessNeeds: $('access-needs').value.trim(),
+          natureMemory: $('nature-memory').value.trim(), website: $('website').value, consent: $('booking-consent').checked });
         reservation = result.reservation; performances = result.performances;
         renderConfirmation();
       } catch (error) {
@@ -69,6 +71,7 @@
     if (reservation.status !== 'confirmed' || T.closed(p)) return;
     T.performanceOptions($('change-options'), performances, reservation.admissions, 'newPerformance', reservation.performanceId, reservation.performanceId);
     $('edit-name').value = reservation.name; $('edit-email').value = reservation.email; $('edit-access').value = reservation.accessNeeds || '';
+    $('edit-memory').value = reservation.natureMemory || '';
     $('change-panel').hidden = false; $('cancel-panel').hidden = true; $('change-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   $('change-booking').addEventListener('click', async event => {
@@ -83,7 +86,13 @@
   $('change-form').addEventListener('submit', async event => {
     event.preventDefault();
     await T.busy(event.submitter, async () => {
-      try { const result = await T.api('change', { ...credentials(), performanceId: event.target.elements.newPerformance.value, newName: $('edit-name').value.trim(), newEmail: $('edit-email').value.trim(), accessNeeds: $('edit-access').value.trim() }); reservation = result.reservation; performances = result.performances; renderConfirmation(); T.message('manage-message', 'Your changes are saved.'); }
+      try {
+        const result = await T.api('change', { ...credentials(), performanceId: event.target.elements.newPerformance.value,
+          newName: $('edit-name').value.trim(), newEmail: $('edit-email').value.trim(), accessNeeds: $('edit-access').value.trim(),
+          natureMemory: $('edit-memory').value.trim() });
+        reservation = result.reservation; performances = result.performances;
+        renderConfirmation(); T.message('manage-message', 'Your changes are saved.');
+      }
       catch (error) { T.message('manage-message', error.message, true); }
     });
   });

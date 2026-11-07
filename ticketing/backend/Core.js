@@ -80,7 +80,7 @@ var ShadowsTickets = (function () {
     }
     function publicReservation(r) {
       return { id: r.id, name: r.name, email: r.email, admissions: r.admissions, performanceId: r.performanceId,
-        status: r.status, accessNeeds: r.accessNeeds, code: r.code };
+        status: r.status, accessNeeds: r.accessNeeds, natureMemory: r.natureMemory || '', code: r.code };
     }
     function choosePerformance(id, admissions, excludeId) {
       var p = state.performances.find(function (item) { return item.id === id; });
@@ -169,7 +169,8 @@ var ShadowsTickets = (function () {
       if (text(input.website, 200, false)) fail('We could not save this booking. Please try again.');
       choosePerformance(input.performanceId, invite.admissions);
       var record = { id: 'SS-' + runtime.random(6).toUpperCase(), code: invite.code, name: name, email: email,
-        accessNeeds: text(input.accessNeeds, 1000, false), admissions: invite.admissions, performanceId: input.performanceId,
+        accessNeeds: text(input.accessNeeds, 1000, false), natureMemory: text(input.natureMemory, 3000, false),
+        admissions: invite.admissions, performanceId: input.performanceId,
         createdAt: runtime.now(), updatedAt: runtime.now(), status: 'confirmed', requestId: reserveRequestId };
       commit('reserved', record);
       return { reservation: publicReservation(record), performances: availability(state) };
@@ -185,7 +186,9 @@ var ShadowsTickets = (function () {
       var nextEmail = input.newEmail == null ? change.email : text(input.newEmail, 254, true).toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nextEmail)) fail('Please enter a valid email address.');
       var nextAccess = input.accessNeeds == null ? change.accessNeeds : text(input.accessNeeds, 1000, false);
-      var updated = Object.assign({}, change, { name: nextName, email: nextEmail, accessNeeds: nextAccess, performanceId: nextPerformance, updatedAt: runtime.now() });
+      var nextMemory = input.natureMemory == null ? (change.natureMemory || '') : text(input.natureMemory, 3000, false);
+      var updated = Object.assign({}, change, { name: nextName, email: nextEmail, accessNeeds: nextAccess,
+        natureMemory: nextMemory, performanceId: nextPerformance, updatedAt: runtime.now() });
       commit('reservationUpdated', updated);
       return { reservation: publicReservation(updated), performances: availability(state) };
     }

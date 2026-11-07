@@ -108,8 +108,8 @@ function loadState_(spreadsheet) {
 function syncSheets_(spreadsheet, state) {
   writeSheet_(spreadsheet, 'Invitations', ['Code', 'Invited by', 'Recipient', 'Admissions', 'Status', 'Created at'],
     state.invitations.map(function (i) { return [i.code, safeCell_(i.inviter), safeCell_(i.recipient), i.admissions, ShadowsTickets.invitationStatus(state, i), i.createdAt]; }));
-  writeSheet_(spreadsheet, 'Reservations', ['Booking reference', 'Guest name', 'Email', 'Invitation code', 'Performance date', 'Admissions', 'Status', 'Access requests', 'Created at', 'Updated at', 'Email status'],
-    state.reservations.map(function (r) { return [r.id, safeCell_(r.name), safeCell_(r.email), r.code, r.performanceId, r.admissions, r.status, safeCell_(r.accessNeeds), r.createdAt, r.updatedAt, 'Not sent']; }));
+  writeSheet_(spreadsheet, 'Reservations', ['Booking reference', 'Guest name', 'Email', 'Invitation code', 'Performance date', 'Admissions', 'Status', 'Access requests', 'Created at', 'Updated at', 'Email status', 'Nature memory'],
+    state.reservations.map(function (r) { return [r.id, safeCell_(r.name), safeCell_(r.email), r.code, r.performanceId, r.admissions, r.status, safeCell_(r.accessNeeds), r.createdAt, r.updatedAt, 'Not sent', safeCell_(r.natureMemory)]; }));
   writeSheet_(spreadsheet, 'Performances', ['Date', 'Performance', 'Start time (Pacific)', 'Capacity', 'Reserved', 'Remaining'],
     ShadowsTickets.availability(state).map(function (p) { return [p.id, p.label, p.time, p.capacity, p.reserved, p.remaining]; }));
 }

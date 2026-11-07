@@ -252,13 +252,14 @@
     const matches = values => values.some(value => String(value ?? '').toLowerCase().includes(q));
     const inviters = new Map(dashboard.invitations.map(i => [i.code, i.inviter]));
     const invitations = dashboard.invitations.filter(i => matches([i.code, i.inviter, i.recipient, i.status]));
-    const reservations = dashboard.reservations.map(r => ({ ...r, inviter: inviters.get(r.code) })).filter(r => matches([r.name, r.email, r.code, r.id, r.status, r.inviter]));
+    const reservations = dashboard.reservations.map(r => ({ ...r, inviter: inviters.get(r.code) })).filter(r => matches([r.name, r.email, r.code, r.id, r.status, r.inviter, r.natureMemory]));
     const e = T.escape;
     const status = value => `<span class="status-pill ${e(value)}">${e(value)}</span>`;
     const date = id => e(T.formatDate(id, { weekday: 'short', month: 'short', day: 'numeric' }));
     renderTable('reservations-table', [
       ['guest', 'name'], ['email', 'email'], ['night', 'performanceId', date], ['people', 'admissions'],
-      ['invited by', 'inviter'], ['status', 'status', status], ['access / notes', 'accessNeeds']
+      ['invited by', 'inviter'], ['status', 'status', status], ['access / notes', 'accessNeeds'],
+      ['nature memory', 'natureMemory', value => value ? `<div class="guest-memory">${e(value)}</div>` : '']
     ], reservations);
     renderTable('invitations-table', [
       ['code', 'code'], ['invited by', 'inviter'], ['for', 'recipient', value => e(value || '—')],
@@ -299,7 +300,7 @@
   $('refresh-dashboard').addEventListener('click', event => T.busy(event.currentTarget, loadDashboard));
   $('export-guests').addEventListener('click', () => {
     if (!dashboard) return;
-    const rows = [['Booking reference', 'Name', 'Email', 'Performance', 'Start time (Pacific)', 'Admissions', 'Status', 'Invited by', 'Code', 'Access requests', 'Email status'], ...dashboard.reservations.map(r => [r.id, r.name, r.email, r.performanceId, dashboard.performances.find(p => p.id === r.performanceId)?.time, r.admissions, r.status, dashboard.invitations.find(i => i.code === r.code)?.inviter, r.code, r.accessNeeds, 'Not sent'])];
+    const rows = [['Booking reference', 'Name', 'Email', 'Performance', 'Start time (Pacific)', 'Admissions', 'Status', 'Invited by', 'Code', 'Access requests', 'Email status', 'Nature memory'], ...dashboard.reservations.map(r => [r.id, r.name, r.email, r.performanceId, dashboard.performances.find(p => p.id === r.performanceId)?.time, r.admissions, r.status, dashboard.invitations.find(i => i.code === r.code)?.inviter, r.code, r.accessNeeds, 'Not sent', r.natureMemory])];
     T.download(new Blob(['\uFEFF' + rows.map(row => row.map(T.csvCell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), 'shadows-guest-list.csv');
   });
   refreshPreview(true);

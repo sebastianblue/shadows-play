@@ -107,6 +107,34 @@ test('guests can edit name, email, and access notes using their code and current
   assert.throws(() => f.call('manage', { code: r.code, email: r.email }), { code: 'AUTH' });
   assert.equal(f.call('manage', { code: r.code, email: 'updated@example.com' }).reservation.id, r.id);
 });
+test('the optional nature memory persists, can be edited or cleared, and accepts older bookings', () => {
+  const f = fixture();
+  const blank = f.reserve(f.issue()[0]);
+  assert.equal(blank.natureMemory, '');
+  const invitations = f.issue(2);
+  assert.throws(() => f.reserve(invitations[0], '2026-11-18', { natureMemory: 'a'.repeat(3001) }));
+  assert.equal(f.state.reservations.length, 1);
+  const memory = 'Watching the tide at dusk.\nThe water glowed.';
+  const booking = f.reserve(invitations[0], '2026-11-18', { natureMemory: '  ' + memory + '  ' });
+  assert.equal(booking.natureMemory, memory);
+  assert.equal(f.call('manage', { code: booking.code, email: booking.email }).reservation.natureMemory, memory);
+  assert.throws(() => f.call('manage', { code: booking.code, email: 'other@example.com' }), { code: 'AUTH' });
+  const credentials = { code: booking.code, email: booking.email };
+  f.call('change', { ...credentials, newName: 'Updated guest' });
+  assert.equal(f.state.reservations[1].natureMemory, memory);
+  assert.throws(() => f.call('change', { ...credentials, natureMemory: 'a'.repeat(3001) }));
+  assert.equal(f.state.reservations[1].natureMemory, memory);
+  const changed = f.call('change', { ...credentials, natureMemory: 'A quiet walk under redwoods.' }).reservation;
+  assert.equal(changed.natureMemory, 'A quiet walk under redwoods.');
+  assert.equal(Core.replay(f.events).reservations[1].natureMemory, changed.natureMemory);
+  assert.equal(f.call('dashboard', { session: 'test-session' }).reservations[1].natureMemory, changed.natureMemory);
+  assert.equal(f.call('change', { ...credentials, natureMemory: '' }).reservation.natureMemory, '');
+  const legacy = Core.replay(f.events);
+  delete legacy.reservations[0].natureMemory;
+  assert.equal(Core.perform(legacy, { action: 'manage', code: blank.code, email: blank.email }, f.runtime).reservation.natureMemory, '');
+  const updatedLegacy = Core.perform(legacy, { action: 'change', code: blank.code, email: blank.email, natureMemory: memory }, f.runtime);
+  assert.equal(updatedLegacy.reservation.natureMemory, memory);
+});
 test('cancellation releases seats, remains idempotent, and does not reopen the code', () => {
   const f = fixture(), inv = f.issue(3, 'together')[0], r = f.reserve(inv);
   f.call('cancel', { code: r.code, email: r.email }); f.call('cancel', { code: r.code, email: r.email });
