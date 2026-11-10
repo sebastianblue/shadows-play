@@ -32,14 +32,35 @@ test('one shared card reserves all admissions together', () => {
   assert.equal(f.reserve(invs[0]).admissions, 4);
   assert.equal(Core.availability(f.state)[0].remaining, 31);
 });
-test('a group cannot exceed remaining capacity', () => {
+test('a shared card can reserve the last spot and adjust its count within capacity', () => {
   const f = fixture();
   f.reserve(f.issue(20, 'together')[0]);
   f.reserve(f.issue(14, 'together')[0]);
   const group = f.issue(2, 'together')[0];
   assert.throws(() => f.reserve(group), { code: 'FULL' });
   assert.equal(Core.availability(f.state)[0].reserved, 34);
-  f.reserve(group, '2026-11-19');
+  for (const admissions of [0, 3, 1.5, '1']) {
+    assert.throws(() => f.reserve(group, '2026-11-18', { admissions }), { code: 'INVALID' });
+  }
+  const requestId = crypto.randomBytes(16).toString('hex');
+  const booking = f.reserve(group, '2026-11-18', { admissions: 1, requestId });
+  assert.equal(booking.admissions, 1);
+  assert.equal(booking.maxAdmissions, 2);
+  assert.deepEqual(f.reserve(group, '2026-11-18', { admissions: 1, requestId }), booking);
+  assert.throws(() => f.reserve(group, '2026-11-19', { admissions: 1 }), { code: 'USED' });
+  assert.equal(Core.availability(f.state)[0].reserved, 35);
+
+  const credentials = { code: booking.code, email: booking.email };
+  assert.throws(() => f.call('change', { ...credentials, admissions: 2 }), { code: 'FULL' });
+  assert.equal(f.call('manage', credentials).reservation.admissions, 1);
+  assert.throws(() => f.call('change', { ...credentials, admissions: 3, performanceId: '2026-11-19' }), { code: 'INVALID' });
+  const moved = f.call('change', { ...credentials, admissions: 2, performanceId: '2026-11-19' }).reservation;
+  assert.equal(moved.id, booking.id);
+  assert.equal(moved.admissions, 2);
+  assert.deepEqual(Core.availability(f.state).map(p => p.reserved), [34, 2, 0]);
+  f.call('change', { ...credentials, admissions: 1 });
+  f.call('change', { ...credentials, newName: 'Returning guest' });
+  assert.deepEqual(Core.availability(Core.replay(f.events)).map(p => p.reserved), [34, 1, 0]);
 });
 test('a code is single-use and lookup never reveals guest details', () => {
   const f = fixture(), inv = f.issue()[0];

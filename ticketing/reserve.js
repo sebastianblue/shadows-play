@@ -2,6 +2,7 @@
   'use strict';
   const T = Tickets, $ = id => document.getElementById(id);
   let invitation, reservation, performances = [], reserveId = T.uid();
+  const bookingForm = $('booking-form'), changeForm = $('change-form');
   function step(name) { ['code-step', 'booking-step', 'confirmation-step'].forEach(id => { $(id).hidden = id !== name; }); }
   function credentials() { return { code: reservation.code, email: reservation.email }; }
   function updateIntent() {
@@ -11,13 +12,27 @@
     T.message('code-error', '');
   }
   document.querySelectorAll('[name=intent]').forEach(input => input.addEventListener('change', updateIntent));
+  function setAdmissionChoices(select, limit, count) {
+    select.replaceChildren(...Array.from({ length: limit }, (_, index) => new Option(index + 1, index + 1)));
+    select.value = String(count);
+    select.parentElement.hidden = limit === 1;
+  }
+  function bookingNights(selected) {
+    T.performanceOptions($('performance-options'), performances, Number(bookingForm.elements.admissions.value), 'performance', selected);
+  }
+  function changeNights(selected) {
+    T.performanceOptions($('change-options'), performances, Number(changeForm.elements.admissions.value), 'newPerformance', selected, reservation);
+  }
+  bookingForm.elements.admissions.addEventListener('change', () => bookingNights(bookingForm.elements.performance.value));
+  changeForm.elements.admissions.addEventListener('change', () => changeNights(changeForm.elements.newPerformance.value || reservation.performanceId));
   async function lookup() {
     const result = await T.api('lookup', { code: $('invitation-code').value });
     if (invitation?.code !== result.invitation.code) $('nature-memory').value = '';
     invitation = result.invitation; performances = result.performances;
-    $('invitation-description').textContent = `${invitation.recipient ? `${invitation.recipient}, this` : 'This'} invitation admits ${invitation.admissions === 1 ? 'one person' : `${invitation.admissions} people, together at the same performance`}.`;
+    $('invitation-description').textContent = `${invitation.recipient ? `${invitation.recipient}, this` : 'This'} invitation admits ${invitation.admissions === 1 ? 'one person' : `up to ${invitation.admissions} people at one performance`}.`;
     $('guest-name').value = invitation.admissions === 1 ? invitation.recipient : '';
-    T.performanceOptions($('performance-options'), performances, invitation.admissions, 'performance');
+    setAdmissionChoices(bookingForm.elements.admissions, invitation.admissions, invitation.admissions);
+    bookingNights();
     step('booking-step'); $('guest-name').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   $('code-form').addEventListener('submit', async event => {
@@ -33,11 +48,12 @@
     });
   });
   $('back-to-code').addEventListener('click', () => { step('code-step'); $('invitation-code').focus(); });
-  $('booking-form').addEventListener('submit', async event => {
+  bookingForm.addEventListener('submit', async event => {
     event.preventDefault(); T.message('booking-error', '');
     await T.busy(event.submitter, async () => {
       try {
-        const result = await T.api('reserve', { code: invitation.code, requestId: reserveId, performanceId: event.target.elements.performance.value,
+        const result = await T.api('reserve', { code: invitation.code, requestId: reserveId, performanceId: bookingForm.elements.performance.value,
+          admissions: Number(bookingForm.elements.admissions.value),
           name: $('guest-name').value.trim(), email: $('guest-email').value.trim(), accessNeeds: $('access-needs').value.trim(),
           natureMemory: $('nature-memory').value.trim(), website: $('website').value, consent: $('booking-consent').checked });
         reservation = result.reservation; performances = result.performances;
@@ -45,7 +61,7 @@
       } catch (error) {
         T.message('booking-error', error.message, true);
         if (error.code === 'FULL' || error.code === 'CLOSED') {
-          try { const result = await T.api('availability'); performances = result.performances; T.performanceOptions($('performance-options'), performances, invitation.admissions, 'performance'); } catch { /* Keep original booking error. */ }
+          try { const result = await T.api('availability'); performances = result.performances; bookingNights(bookingForm.elements.performance.value); } catch { /* Keep original booking error. */ }
         }
       }
     }, 'saving your place…');
@@ -69,7 +85,8 @@
   function openEditor() {
     const p = performances.find(perf => perf.id === reservation.performanceId);
     if (reservation.status !== 'confirmed' || T.closed(p)) return;
-    T.performanceOptions($('change-options'), performances, reservation.admissions, 'newPerformance', reservation.performanceId, reservation.performanceId);
+    setAdmissionChoices(changeForm.elements.admissions, reservation.maxAdmissions ?? reservation.admissions, reservation.admissions);
+    changeNights(reservation.performanceId);
     $('edit-name').value = reservation.name; $('edit-email').value = reservation.email; $('edit-access').value = reservation.accessNeeds || '';
     $('edit-memory').value = reservation.natureMemory || '';
     $('change-panel').hidden = false; $('cancel-panel').hidden = true; $('change-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -83,11 +100,12 @@
     });
   });
   $('close-change').addEventListener('click', () => { $('change-panel').hidden = true; });
-  $('change-form').addEventListener('submit', async event => {
+  changeForm.addEventListener('submit', async event => {
     event.preventDefault();
     await T.busy(event.submitter, async () => {
       try {
-        const result = await T.api('change', { ...credentials(), performanceId: event.target.elements.newPerformance.value,
+        const result = await T.api('change', { ...credentials(), performanceId: changeForm.elements.newPerformance.value,
+          admissions: Number(changeForm.elements.admissions.value),
           newName: $('edit-name').value.trim(), newEmail: $('edit-email').value.trim(), accessNeeds: $('edit-access').value.trim(),
           natureMemory: $('edit-memory').value.trim() });
         reservation = result.reservation; performances = result.performances;

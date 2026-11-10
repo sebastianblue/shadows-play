@@ -33,7 +33,7 @@
       recipient ? `${recipient},` : 'Hello,', '', 'join us in the forest.', '',
       'we’re still seeing shadows', `${timeLabel()}, November 18, 19 & 20, 2026`, '',
       `${invitation.admissions} ${invitation.admissions === 1 ? 'entry' : 'entries'}`,
-      ...(invitation.admissions > 1 ? ['Everyone on this invitation reserves the same performance.'] : []), '',
+      ...(invitation.admissions > 1 ? [`You can reserve up to ${invitation.admissions} places at one performance.`] : []), '',
       'to claim your spot, go to:', `${T.publicBase()}/reserve`,
       'and type your special code:', invitation.code, '',
       'Choose your night, subject to availability.', '', invitation.inviter

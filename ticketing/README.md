@@ -7,7 +7,7 @@ The pages use Sometype Mono, the centered ASCII deer, and background `#274e13`. 
 ## What works
 
 - Team password checked on the server, with an eight-hour session.
-- One ticket per separate invitation, or all admissions on one shared card.
+- One ticket per separate invitation, or one shared card that can reserve any number of its admissions for one performance.
 - Optional names, printable US Letter PDFs, and an editable email draft for each invitation.
 - Two-word invitation codes from `nature_adjectives_nouns_100.xlsx`, `Nature Words!A2:A101` and `C2:C101`. All 10,000 combinations are used before falling back to adjective/adjective/noun codes with column B. Codes are never reused, including after cancellation or voiding. Capitalization, spaces, and hyphens are ignored when redeeming a code.
 - November 18, 19, and 20, 2026, initially 7:30 pm Pacific and 35 admissions per night. Both capacity and time can be edited from the guest list.
