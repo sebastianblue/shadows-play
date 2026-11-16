@@ -4,7 +4,7 @@
   let invitation, reservation, performances = [], reserveId = T.uid();
   const bookingForm = $('booking-form'), changeForm = $('change-form');
   const venueNotes = {
-    '2026-11-18': 'Moved indoors to Stanford’s campus. Venue and arrival details to follow.'
+    '2026-11-18': "Moved indoors to somewhere on Stanford's campus."
   };
   function arrivalNote(performanceId) {
     return venueNotes[performanceId] || 'The team will send meeting details closer to the performance.';
