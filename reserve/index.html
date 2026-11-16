@@ -5,10 +5,10 @@
   <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#274e13"><title>reserve — shadows</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../ticketing/tickets.css?v=20261116-rain">
+  <link rel="stylesheet" href="../ticketing/tickets.css?v=20261116-soft-rain">
   <script src="../ticketing/config.js?v=live-20261028" defer></script><script src="../ticketing/runtime.js" defer></script>
   <script src="../ticketing/shared.js?v=20261116-venue" defer></script><script src="../ticketing/reserve.js?v=20261116-indoor" defer></script>
-  <script src="../ticketing/ascii-rain.js?v=20261116" defer></script>
+  <script src="../ticketing/ascii-rain.js?v=20261116-soft-rain" defer></script>
 </head>
 <body data-page="reserve">
 <canvas id="reserve-rain" aria-hidden="true" hidden></canvas>
@@ -39,6 +39,5 @@
   <fieldset class="performance-picker"><legend>night</legend><div id="change-options" class="performance-options"></div></fieldset><div class="field"><label for="edit-name">name</label><input id="edit-name" name="newName" required maxlength="100" autocomplete="name"></div><div class="field"><label for="edit-email">email</label><input id="edit-email" name="newEmail" type="email" required maxlength="254" autocomplete="email"></div><div class="field"><label for="edit-access">access needs or a note (optional)</label><textarea id="edit-access" name="accessNeeds" rows="2" maxlength="1000"></textarea></div><div class="field"><label for="edit-memory">share a cherished memory of experiencing the natural world (optional)</label><textarea id="edit-memory" name="natureMemory" rows="4" maxlength="3000"></textarea></div><div class="button-row"><button type="submit">save</button><button id="close-change" type="button">keep my details</button></div></form></div><div id="cancel-panel" hidden><p>Cancel all places in this booking? This invitation code cannot be reused.</p><div class="button-row"><button id="confirm-cancel" type="button">cancel booking</button><button id="keep-booking" type="button">keep booking</button></div></div><button id="back-to-start" type="button" class="text-button">back</button><p id="manage-message" class="message" role="status" hidden></p></section>
 <noscript><p>Please enable JavaScript to reserve.</p></noscript>
 </main>
-<button id="rain-toggle" class="text-button" type="button" hidden>pause rain</button>
 </body>
 </html>

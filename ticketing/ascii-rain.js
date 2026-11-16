@@ -3,12 +3,11 @@
 (function () {
   'use strict';
   const canvas = document.getElementById('reserve-rain');
-  const toggle = document.getElementById('rain-toggle');
   const context = canvas.getContext('2d');
   if (!context) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let columnWidth, lineHeight, columns, rows, drops = [], timer, paused = false;
+  let columnWidth, lineHeight, columns, rows, drops = [], timer;
 
   function paint() {
     context.clearRect(0, 0, columns * columnWidth, rows * lineHeight);
@@ -18,7 +17,7 @@
   }
 
   function resize() {
-    if (reducedMotion.matches || paused) return;
+    if (reducedMotion.matches || document.hidden) return;
     const width = document.documentElement.clientWidth;
     const height = window.innerHeight;
     const scale = Math.min(window.devicePixelRatio || 1, 2);
@@ -53,16 +52,13 @@
 
   function sync() {
     window.clearInterval(timer);
-    canvas.hidden = reducedMotion.matches || paused;
-    toggle.hidden = reducedMotion.matches;
-    toggle.textContent = paused ? 'play rain' : 'pause rain';
+    canvas.hidden = reducedMotion.matches;
     if (!canvas.hidden && !document.hidden) {
       resize();
       timer = window.setInterval(advance, 60);
     }
   }
 
-  toggle.addEventListener('click', () => { paused = !paused; sync(); });
   window.addEventListener('resize', resize);
   document.addEventListener('visibilitychange', sync);
   reducedMotion.addEventListener('change', sync);
