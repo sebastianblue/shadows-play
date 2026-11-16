@@ -3,6 +3,12 @@
   const T = Tickets, $ = id => document.getElementById(id);
   let invitation, reservation, performances = [], reserveId = T.uid();
   const bookingForm = $('booking-form'), changeForm = $('change-form');
+  const venueNotes = {
+    '2026-11-18': 'Moved indoors to Stanford’s campus. Venue and arrival details to follow.'
+  };
+  function arrivalNote(performanceId) {
+    return venueNotes[performanceId] || 'The team will send meeting details closer to the performance.';
+  }
   function step(name) { ['code-step', 'booking-step', 'confirmation-step'].forEach(id => { $(id).hidden = id !== name; }); }
   function credentials() { return { code: reservation.code, email: reservation.email }; }
   function updateIntent() {
@@ -18,10 +24,10 @@
     select.parentElement.hidden = limit === 1;
   }
   function bookingNights(selected) {
-    T.performanceOptions($('performance-options'), performances, Number(bookingForm.elements.admissions.value), 'performance', selected);
+    T.performanceOptions($('performance-options'), performances, Number(bookingForm.elements.admissions.value), 'performance', selected, null, venueNotes);
   }
   function changeNights(selected) {
-    T.performanceOptions($('change-options'), performances, Number(changeForm.elements.admissions.value), 'newPerformance', selected, reservation);
+    T.performanceOptions($('change-options'), performances, Number(changeForm.elements.admissions.value), 'newPerformance', selected, reservation, venueNotes);
   }
   bookingForm.elements.admissions.addEventListener('change', () => bookingNights(bookingForm.elements.performance.value));
   changeForm.elements.admissions.addEventListener('change', () => changeNights(changeForm.elements.newPerformance.value || reservation.performanceId));
@@ -70,7 +76,7 @@
     const cancelled = reservation.status === 'cancelled', p = performances.find(perf => perf.id === reservation.performanceId);
     $('confirmation-title').textContent = (cancelled ? 'cancelled' : 'reserved') + (T.isPreview ? ' (preview)' : '');
     $('reservation-detail').innerHTML = `<p>${T.escape(p.label)}, 2026</p><p>${T.escape(T.time(p.time))} Pacific</p><p>${reservation.admissions} ${reservation.admissions === 1 ? 'person' : 'people'}</p><p>${T.escape(reservation.name)}</p><p>${T.escape(reservation.email)}</p><p>${T.escape(reservation.id)}</p>`;
-    $('confirmation-note').textContent = cancelled ? 'Your places have been released.' : 'The team will send meeting details closer to the performance.';
+    $('confirmation-note').textContent = cancelled ? 'Your places have been released.' : arrivalNote(p.id);
     $('booking-code-reminder').textContent = `Your code: ${reservation.code}. To change this booking, return to /reserve and choose “change details” with this code and your booking email.`;
     $('manage-controls').hidden = cancelled || T.closed(p);
     $('change-panel').hidden = true; $('cancel-panel').hidden = true;
@@ -79,7 +85,8 @@
   }
   $('save-booking').addEventListener('click', () => {
     const p = performances.find(perf => perf.id === reservation.performanceId);
-    const text = ['WE’RE STILL SEEING SHADOWS', '', `For: ${reservation.name}`, `${p.label}, 2026`, `${T.time(p.time)} Pacific`, `${reservation.admissions} ${reservation.admissions === 1 ? 'visitor' : 'visitors'} expected`, `Reference: ${reservation.id}`, `Special code: ${reservation.code}`, `Booking email: ${reservation.email}`, '', 'The team will contact you with arrival instructions.', '', `To change or cancel: ${T.publicBase()}/reserve`, 'Choose “change details” and enter your code and booking email.', '', 'An email confirmation has not been sent.', ...(T.isPreview ? ['', 'LOCAL PREVIEW ONLY. This is not a live reservation.'] : [])].join('\n');
+    const note = reservation.status === 'cancelled' ? 'Your places have been released.' : arrivalNote(p.id);
+    const text = ['WE’RE STILL SEEING SHADOWS', '', `For: ${reservation.name}`, `${p.label}, 2026`, `${T.time(p.time)} Pacific`, `${reservation.admissions} ${reservation.admissions === 1 ? 'visitor' : 'visitors'} expected`, `Reference: ${reservation.id}`, `Special code: ${reservation.code}`, `Booking email: ${reservation.email}`, '', note, '', `To change or cancel: ${T.publicBase()}/reserve`, 'Choose “change details” and enter your code and booking email.', '', 'An email confirmation has not been sent.', ...(T.isPreview ? ['', 'LOCAL PREVIEW ONLY. This is not a live reservation.'] : [])].join('\n');
     T.download(new Blob([text], { type: 'text/plain;charset=utf-8' }), `shadows-booking-${reservation.id}.txt`);
   });
   function openEditor() {

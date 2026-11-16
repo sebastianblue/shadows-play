@@ -59,13 +59,15 @@
   }
   function formatDate(id, options) { return new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', ...options }).format(new Date(`${id}T12:00:00-08:00`)); }
   function closed(performance) { return Date.parse(`${performance.id}T${performance.time}:00-08:00`) <= Date.now(); }
-  function performanceOptions(node, performances, admissions, name, selected, currentReservation) {
+  function performanceOptions(node, performances, admissions, name, selected, currentReservation, venueNotes = {}) {
     node.innerHTML = performances.map(p => {
       const left = p.remaining + (p.id === currentReservation?.performanceId ? currentReservation.admissions : 0);
       const ended = closed(p), full = left < admissions;
       const selectable = !ended && !full;
       const availability = ended ? 'closed' : full ? (left === 0 ? 'full' : 'not enough places for your group') : `${left} ${left === 1 ? 'place' : 'places'} available`;
-      return `<label class="night-option"><input type="radio" name="${escape(name)}" value="${escape(p.id)}" required ${selectable ? '' : 'disabled'} ${selectable && selected === p.id ? 'checked' : ''}><span class="performance-description">${escape(p.label)}, ${escape(time(p.time))} Pacific<span class="availability">${availability}</span></span></label>`;
+      const venue = venueNotes[p.id];
+      const venueLine = venue ? `<span class="availability">${escape(venue)}</span>` : '';
+      return `<label class="night-option"><input type="radio" name="${escape(name)}" value="${escape(p.id)}" required ${selectable ? '' : 'disabled'} ${selectable && selected === p.id ? 'checked' : ''}><span class="performance-description">${escape(p.label)}, ${escape(time(p.time))} Pacific${venueLine}<span class="availability">${availability}</span></span></label>`;
     }).join('');
   }
   function publicBase() { return isPreview ? window.location.origin : config.publicUrl.replace(/\/$/, ''); }
